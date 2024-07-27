@@ -107,19 +107,17 @@ axiosInstance.interceptors.response.use(responseSuccessFn, responseErrorFn);
  *
  */
 
-// includes built in error handling
-export const axiosGet = async (relativeUri) => {
-  // returns JSON form
-
+export const axiosBackendGet = async (uri) => {
   try {
-    const response = await axiosInstance.get(relativeUri);
+    // axios returns JSON form
+    const response = await axiosInstance.get(uri);
     const successResponse = {
       // server data is {success: true/false, data}
       success: response.data.success,
       data: response.data.data,
       error: null,
     };
-    console.log("axiosGet returning successResponse", successResponse);
+    // console.log("axiosBackendGet returning successResponse", successResponse);
     return successResponse;
   } catch (error) {
     console.log("AxiosError", error);
@@ -131,23 +129,49 @@ export const axiosGet = async (relativeUri) => {
         message: error.response.data,
       },
     };
-    console.log("axiosGet returning errorResponse", errorResponse);
+    // console.log("axiosBackendGet returning errorResponse", errorResponse);
     return errorResponse;
   }
 };
 
-// TO REFINE AS GET
-export const axiosPost = async (relativeUri, data, config) => {
+export const axiosBackendPost = async (uri, data, config) => {
   // axios stringifies the post data when we send Javascript objects
   try {
-    const response = await axiosInstance.post(relativeUri, data, config);
+    const response = await axiosInstance.post(uri, data, config);
     const successResponse = {
       // server data is {success: true/false, data}
       success: response.data.success,
       data: response.data,
       error: null,
     };
-    console.log("axiosPost returning successResponse", successResponse);
+    // console.log("axiosBackendPost returning successResponse", successResponse);
+    return successResponse;
+  } catch (error) {
+    console.log("AxiosError", error);
+    const errorResponse = {
+      success: false,
+      data: null,
+      error: {
+        status: error.response.status,
+        message: error.response.data.msg,
+      },
+    };
+    console.log("axiosBackendPost returning errorResponse", errorResponse);
+    return errorResponse;
+  }
+};
+
+export const axiosBackendDelete = async (uri, config) => {
+  // axios stringifies the post data when we send Javascript objects
+  try {
+    const response = await axiosInstance.delete(uri, config);
+    const successResponse = {
+      // server data is {success: true/false, data}
+      success: response.data.success,
+      data: null,
+      error: null,
+    };
+    // console.log("axiosPost returning successResponse", successResponse);
     return successResponse;
   } catch (error) {
     console.log("AxiosError", error);
@@ -161,6 +185,53 @@ export const axiosPost = async (relativeUri, data, config) => {
     };
     console.log("axiosPost returning errorResponse", errorResponse);
     return errorResponse;
+  }
+};
+
+/**
+ * Returns the img uri for a given dogamiId
+ * @param {*} dogamiId
+ * @returns { success: boolean}
+ */
+
+export const axiosDogamiUri = async (dogamiId) => {
+  try {
+    /**
+     * tezos endpoint exists but only covers alpha:
+     * `https://proxy.dogami.com/metadata/dogami/tezos/${dogamiId}`;
+     * matic uri required because it covers both alpha and gamma dogami
+     */
+
+    const uri = `https://proxy.dogami.com/metadata/dogami/matic/${dogamiId}`;
+
+    const response = await axiosInstance.get(uri);
+    const successResponse = {
+      success: true,
+      data: response.data, // axios returns .data in JSON
+      error: null,
+    };
+    console.log("axiosDogamiUri returning successResponse", successResponse);
+    return successResponse;
+  } catch (error) {
+    const errorResponse = {
+      success: false,
+      data: null,
+      error: {
+        status: error.response.status,
+        message: error.response.data.msg,
+      },
+    };
+    console.log("axiosDogamiUri returning errorResponse", errorResponse);
+    return errorResponse;
+  }
+};
+
+export const axiosHtml = async (url) => {
+  try {
+    const { data } = await axiosInstance.get(url);
+    return data;
+  } catch (error) {
+    console.log("axiosHtml error:", error);
   }
 };
 

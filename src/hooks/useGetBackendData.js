@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { axiosGet } from "./lib/axiosUtility";
+import { axiosBackendGet } from "../lib/axiosUtility";
 
 /**
  * Custom hook for all get requests to the backend server
  */
 
-const useGetBackendData = (relativeUri) => {
+const useGetBackendData = (relativeUri, updateTrigger) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const useGetBackendData = (relativeUri) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axiosGet(relativeUri);
+        const response = await axiosBackendGet(relativeUri);
         if (response.success) {
           setData(response.data);
         } else {
@@ -28,7 +28,7 @@ const useGetBackendData = (relativeUri) => {
       }
     };
     getData();
-  }, []);
+  }, [updateTrigger]);
 
   return { data, error, loading };
 };

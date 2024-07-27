@@ -6,6 +6,15 @@ import { Outlet, Link } from "react-router-dom";
 
 import ScrollToTop from "./scrollToTop";
 
+/**
+ *
+ * Front-end to do list:
+ * - Review and implement useContext where sensible.
+ * - Implement a structure for managing the logged in user:
+ *    - reflecting the logged in user in the nav bar
+ *    - probably creating a factory for a combined user and localStorage?
+ */
+
 function App() {
   return (
     <>

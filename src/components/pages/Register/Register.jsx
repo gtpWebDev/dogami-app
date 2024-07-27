@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { axiosPost } from "./lib/axiosUtility";
-import AuthService from "./lib/AuthService";
+import { axiosBackendPost } from "../../../lib/axiosUtility";
+import AuthService from "../../../lib/AuthService";
 
-import { LOGIN_URI, HEADER_JSON_CONFIG } from "./constants/backendRequests";
+import {
+  REGISTER_URI,
+  HEADER_JSON_CONFIG,
+} from "../../../constants/backendRequests";
 import { Navigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,10 +18,13 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const body = { username, password };
-    const response = await axiosPost(LOGIN_URI, body, HEADER_JSON_CONFIG);
+    const response = await axiosBackendPost(
+      REGISTER_URI,
+      body,
+      HEADER_JSON_CONFIG
+    );
     if (response.success) {
       const credentials = response.data;
-      console.log("received credentials", credentials);
       // store credentials in local storage and update current user
       const authService = new AuthService();
       authService.setLocalStorage(credentials);
@@ -33,7 +39,7 @@ const Login = () => {
       {/* User available after successful login, redirect to dashboard */}
       {existingUser && <Navigate to={`/dashboard`} replace={false} />}
 
-      <h3>Login Page</h3>
+      <h3>Register Page</h3>
 
       <form method="post" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
@@ -47,7 +53,7 @@ const Login = () => {
         <br />
         <label htmlFor="password">Password:</label>
         <input
-          type="text"
+          type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -62,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

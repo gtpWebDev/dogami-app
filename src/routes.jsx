@@ -1,9 +1,11 @@
 import App from "./App";
-import Home from "./Home";
-import Register from "./Register";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import ErrorPage from "./ErrorPage";
+import HomePage from "./components/pages/HomePage/HomePage";
+import Register from "./components/pages/Register/Register";
+import Login from "./components/pages/Login/Login";
+import Dashboard from "./components/pages/Dashboard/Dashboard";
+import Dogami from "./components/pages/Dogami/Dogami";
+import DogamiTrack from "./components/pages/DogamiTrack/DogamiTrack";
+import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 
 // create the configuration for the router
 const routes = [
@@ -14,7 +16,7 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       // renders when there are no children
-      { index: true, element: <Home /> },
+      { index: true, element: <HomePage /> },
       {
         path: "/register",
         element: <Register />,
@@ -27,10 +29,14 @@ const routes = [
         path: "/dashboard",
         element: <Dashboard />,
       },
-      // {
-      //   path: "/profile/:profileId",
-      //   element: <Profile />,
-      // },
+      {
+        path: "/dogami/:dogamiId",
+        element: <Dogami />,
+      },
+      {
+        path: "/dogami/:dogamiId/track/:trackId",
+        element: <DogamiTrack />,
+      },
     ],
   },
 ];
