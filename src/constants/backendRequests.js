@@ -1,4 +1,5 @@
 // Vite accessed .env.development or .env.production as appropriate
+
 // addresses setup differently in different files
 export const BACKEND_URI = import.meta.env.VITE_BACKEND_URL;
 
