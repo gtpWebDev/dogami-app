@@ -1,8 +1,6 @@
-// export const BACKEND_URI =
-//   "https://skeleton-jwt-auth-production.up.railway.app";
-
-export const BACKEND_URI =
-  "https://dogami-backend-production-4978.up.railway.app";
+// Vite accessed .env.development or .env.production as appropriate
+// addresses setup differently in different files
+export const BACKEND_URI = import.meta.env.VITE_BACKEND_URL;
 
 export const REGISTER_URI = BACKEND_URI + "/user/register";
 export const LOGIN_URI = BACKEND_URI + "/user/login";
