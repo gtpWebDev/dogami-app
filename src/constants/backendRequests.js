@@ -5,7 +5,7 @@ export const BACKEND_URI = "http://localhost:3000";
 
 export const REGISTER_URI = BACKEND_URI + "/user/register";
 export const LOGIN_URI = BACKEND_URI + "/user/login";
-export const ADD_DOGAMI_URI = BACKEND_URI + "/dogami/create";
+export const ADD_DOGAMI_URI = BACKEND_URI + "/dogamis/create";
 
 export const HEADER_JSON_CONFIG = {
   headers: {

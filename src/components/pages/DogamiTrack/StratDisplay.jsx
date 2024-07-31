@@ -1,42 +1,36 @@
-import { useState, useEffect } from "react";
-
-import { Link } from "react-router-dom";
-
-import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpoints";
+import { useState } from "react";
 
 import {
   BACKEND_URI,
   HEADER_JSON_CONFIG,
 } from "../../../constants/backendRequests";
 
-const DogamiDisplay = (props) => {
-  return props.dogData.map((element) => (
+import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpoints";
+
+const TrackStatsDisplay = (props) => {
+  return props.dogamiStrats.map((element) => (
     <div key={element._id}>
-      <DogImage url={element.img_url} />
-      {element.dogami_official_id}&nbsp;&nbsp;
-      <Link to={`/dogami/${element._id}`}>{element.name}</Link>&nbsp;&nbsp;
-      <DeleteDogButton
-        dogamiId={element._id}
+      Track: {element.track_id.name}&nbsp;&nbsp; Power 1: {element.power_1.name}
+      &nbsp;&nbsp; Power 2: {element.power_2.name}&nbsp;&nbsp; Consumable 1:{" "}
+      {element.consumable_1.name}&nbsp;&nbsp; &nbsp;&nbsp; Best Time:{" "}
+      {element.strat_best_time}&nbsp;&nbsp;
+      <DeleteStratButton
+        stratId={element._id}
+        dogamiId={props.dogamiId}
+        trackId={props.trackId}
         updateTrigger_cbfn={props.updateTrigger_cbfn}
       />
     </div>
   ));
 };
 
-const DogImage = (props) => {
-  return (
-    <>{<img src={`${props.url}?w=200&auto=format`} alt="" width={200} />}</>
-  );
-};
-
-const DeleteDogButton = (props) => {
+const DeleteStratButton = (props) => {
   const [errorMsg, setErrorMsg] = useState(null);
 
   // should add modulars - "are you sure"? and "deletion error"
   const handleDelete = async () => {
-    const deleteUri = `${BACKEND_URI}/dogamis/${props.dogamiId}`;
+    const deleteUri = `${BACKEND_URI}/dogamis/${props.dogamiId}/strats/${props.stratId}`;
     const response = await axiosBackendDelete(deleteUri, HEADER_JSON_CONFIG);
-
     if (response.success) {
       // need to refresh content of page to include the new dog
       props.updateTrigger_cbfn(new Date());
@@ -54,4 +48,4 @@ const DeleteDogButton = (props) => {
   );
 };
 
-export default DogamiDisplay;
+export default TrackStatsDisplay;

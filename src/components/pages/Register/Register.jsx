@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { axiosBackendPost } from "../../../lib/axiosUtility";
+import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
 import {

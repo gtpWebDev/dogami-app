@@ -1,7 +1,7 @@
 // Have doubled up here on learning use of the axios library
 // so have separated the axios http requests into this module
 
-import { BACKEND_URI } from "../constants/backendRequests";
+import { BACKEND_URI } from "../../constants/backendRequests";
 
 import axios from "axios";
 
@@ -171,7 +171,7 @@ export const axiosBackendDelete = async (uri, config) => {
       data: null,
       error: null,
     };
-    // console.log("axiosPost returning successResponse", successResponse);
+    // console.log("axiosBackendDelete returning successResponse", successResponse);
     return successResponse;
   } catch (error) {
     console.log("AxiosError", error);
@@ -183,59 +183,22 @@ export const axiosBackendDelete = async (uri, config) => {
         message: error.response.data.msg,
       },
     };
-    console.log("axiosPost returning errorResponse", errorResponse);
+    console.log("axiosBackendDelete returning errorResponse", errorResponse);
     return errorResponse;
-  }
-};
-
-/**
- * Returns the img uri for a given dogamiId
- * @param {*} dogamiId
- * @returns { success: boolean}
- */
-
-export const axiosDogamiUri = async (dogamiId) => {
-  try {
-    /**
-     * tezos endpoint exists but only covers alpha:
-     * `https://proxy.dogami.com/metadata/dogami/tezos/${dogamiId}`;
-     * matic uri required because it covers both alpha and gamma dogami
-     */
-
-    const uri = `https://proxy.dogami.com/metadata/dogami/matic/${dogamiId}`;
-
-    const response = await axiosInstance.get(uri);
-    const successResponse = {
-      success: true,
-      data: response.data, // axios returns .data in JSON
-      error: null,
-    };
-    console.log("axiosDogamiUri returning successResponse", successResponse);
-    return successResponse;
-  } catch (error) {
-    const errorResponse = {
-      success: false,
-      data: null,
-      error: {
-        status: error.response.status,
-        message: error.response.data.msg,
-      },
-    };
-    console.log("axiosDogamiUri returning errorResponse", errorResponse);
-    return errorResponse;
-  }
-};
-
-export const axiosHtml = async (url) => {
-  try {
-    const { data } = await axiosInstance.get(url);
-    return data;
-  } catch (error) {
-    console.log("axiosHtml error:", error);
   }
 };
 
 // not currently used
+
+// export const axiosHtml = async (url) => {
+//   try {
+//     const { data } = await axiosInstance.get(url);
+//     return data;
+//   } catch (error) {
+//     console.log("axiosHtml error:", error);
+//   }
+// };
+
 // export const axiosWithConfig = async (config) => {
 //   const config = {
 //     method: "post",

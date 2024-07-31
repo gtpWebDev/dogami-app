@@ -1,26 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import styles from "./AddDogamiForm.module.css";
+import styles from "./DogamiAddForm.module.css";
 
 import {
   ADD_DOGAMI_URI,
   HEADER_JSON_CONFIG,
 } from "../../../constants/backendRequests";
 
-import { axiosBackendPost, axiosDogamiUri } from "../../../lib/axiosUtility";
+import { axiosDogamiUri } from "../../../lib/axiosRequests/axiosDogamiEndpoints";
+import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
+
 import { constructDogamiObject } from "../../../lib/dogamiData";
 
-const AddDogamiForm = (props) => {
-  const [dogamiOfficialId, setDogamiOfficialId] = useState("3750");
+const DogamiAddForm = (props) => {
+  const [dogamiOfficialId, setDogamiOfficialId] = useState("1000");
   const [dogami, setDogami] = useState(null);
   const [addDogamiMsg, setAddDogamiMsg] = useState(null);
 
   const selectDogami = async (event) => {
     event.preventDefault();
-    const response = await axiosDogamiUri(dogamiOfficialId);
+
+    const response = await axiosDogamiUri(dogamiOfficialId); // returns an array
     if (response.success) {
-      // construct dogami data for UI and for backend
-      const dogamiObj = constructDogamiObject(response.data);
+      // construct a Dogami class from the collected data
+      const dogamiObj = constructDogamiObject(response.data[0]);
       setDogami(dogamiObj);
     } else {
       setAddDogamiMsg(response.error);
@@ -61,11 +64,12 @@ const AddDogamiForm = (props) => {
 
       {dogami && (
         <>
+          {/* Extract this to a dog img component */}
           <p>Name: {dogami.name}</p>
           <p>Breed: {dogami.breed}</p>
           <p>Collection: {dogami.dog_collection}</p>
-          {/* Message for add dogami issues */}
-          {addDogamiMsg ? <p>{addDogamiMsg}</p> : <></>}
+          <p>Level: {dogami.level}</p>
+          <p>Rarity: {dogami.rarity}</p>
           <button onClick={addDogamiToBackend}>Add Dog</button>
         </>
       )}
@@ -73,4 +77,4 @@ const AddDogamiForm = (props) => {
   );
 };
 
-export default AddDogamiForm;
+export default DogamiAddForm;

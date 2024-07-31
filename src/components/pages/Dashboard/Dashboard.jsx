@@ -6,7 +6,8 @@ import AuthService from "../../../lib/AuthService";
 import { Link } from "react-router-dom";
 
 import DogamiDisplay from "./DogamiDisplay";
-import AddDogamiForm from "./AddDogamiForm";
+import DogamiAddForm from "./DogamiAddForm";
+import AccountAddForm from "./AccountAddForm";
 
 const Dashboard = () => {
   // trigger for the custom hook
@@ -42,7 +43,8 @@ const Authorised = (props) => {
           dogData={props.data.owned_dogs}
           updateTrigger_cbfn={props.updateTrigger_cbfn}
         />
-        <AddDogamiForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
+        <DogamiAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
+        <AccountAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
         <p>
           <button onClick={logout}>logout</button>
         </p>

@@ -1,5 +1,10 @@
-import { useEffect, useState } from "react";
-import { axiosBackendGet } from "../../../lib/axiosUtility";
+import useDogamiTrackData from "../../../hooks/useDogamiTrackData";
+
+import { useState } from "react";
+
+import StrategyAddForm from "./StrategyAddForm";
+
+import TrackStatsDisplay from "./StratDisplay";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -7,8 +12,16 @@ const DogamiTrack = () => {
   // route params
   const { dogamiId, trackId } = useParams();
 
+  // trigger for the custom hook
+  const [updateTrigger, setUpdateTrigger] = useState(new Date());
+  const updateTrigger_cbfn = (timestamp) => setUpdateTrigger(timestamp);
+
   // custom hook
-  const { data, error, loading } = useDogamiTrackData(dogamiId, trackId);
+  const { data, error, loading } = useDogamiTrackData(
+    dogamiId,
+    trackId,
+    updateTrigger
+  );
 
   if (loading) return <p>Loading...</p>;
 
@@ -39,54 +52,29 @@ const DogamiTrack = () => {
         <p>Dogami: {data.dogami.name}</p>
         <p>Track: {data.track.name}</p>
 
-        <TrackStatsDisplay trackStatsData={data.dogamiTrackStrats} />
+        <h4>Tried Strategies</h4>
+        <TrackStatsDisplay
+          dogamiStrats={data.dogamiStrats}
+          updateTrigger_cbfn={updateTrigger_cbfn}
+          dogamiId={dogamiId}
+        />
         <p>
           <Link to={`/dogami/${dogamiId}`}>Return to dogami</Link>
         </p>
         <p>
           <Link to="/dashboard">Return to dashboard</Link>
         </p>
+        {data && (
+          <StrategyAddForm
+            dogamiId={dogamiId}
+            trackId={trackId}
+            data={data}
+            updateTrigger_cbfn={updateTrigger_cbfn}
+          />
+        )}
       </div>
     </>
   );
-};
-
-const useDogamiTrackData = (dogamiId, trackId) => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const [dogami, track, strat] = await Promise.all([
-          axiosBackendGet(`dogami/${dogamiId}`),
-          axiosBackendGet(`track/${trackId}`),
-          axiosBackendGet(`dogami/${dogamiId}/strats?track_id=${trackId}`),
-        ]);
-        setData({
-          dogami: dogami.data,
-          track: track.data,
-          dogamiTrackStrats: strat.data,
-        });
-      } catch (error) {
-        setError(error);
-      }
-      setLoading(false);
-    };
-    getData();
-  }, []);
-
-  return { data, error, loading };
-};
-
-const TrackStatsDisplay = (props) => {
-  return props.trackStatsData.map((element) => (
-    <div key={element._id}>
-      Track: {element.track_id.name}&nbsp;&nbsp; Power 1: {element.power_1}
-      &nbsp;&nbsp; Best Time: {element.strat_best_time}
-    </div>
-  ));
 };
 
 export default DogamiTrack;
