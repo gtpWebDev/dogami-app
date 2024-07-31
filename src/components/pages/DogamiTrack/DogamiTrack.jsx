@@ -2,7 +2,7 @@ import useDogamiTrackData from "../../../hooks/useDogamiTrackData";
 
 import { useState } from "react";
 
-import StrategyAddForm from "./StrategyAddForm";
+import DogamiStratAddForm from "../../composites/StrategyAddForm";
 
 import TrackStatsDisplay from "./StratDisplay";
 
@@ -17,7 +17,7 @@ const DogamiTrack = () => {
   const updateTrigger_cbfn = (timestamp) => setUpdateTrigger(timestamp);
 
   // custom hook
-  const { data, error, loading } = useDogamiTrackData(
+  const { trackData, error, loading } = useDogamiTrackData(
     dogamiId,
     trackId,
     updateTrigger
@@ -49,12 +49,12 @@ const DogamiTrack = () => {
       <h3>Dogami Track Strategies</h3>
       <div>
         <p>You are authorized!</p>
-        <p>Dogami: {data.dogami.name}</p>
-        <p>Track: {data.track.name}</p>
+        <p>Dogami: {trackData.dogami.name}</p>
+        <p>Track: {trackData.track.name}</p>
 
         <h4>Tried Strategies</h4>
         <TrackStatsDisplay
-          dogamiStrats={data.dogamiStrats}
+          dogamiStrats={trackData.dogamiStrats}
           updateTrigger_cbfn={updateTrigger_cbfn}
           dogamiId={dogamiId}
         />
@@ -64,11 +64,12 @@ const DogamiTrack = () => {
         <p>
           <Link to="/dashboard">Return to dashboard</Link>
         </p>
-        {data && (
-          <StrategyAddForm
+        {trackData && (
+          <DogamiStratAddForm
             dogamiId={dogamiId}
+            isTrackUserProvided={false}
             trackId={trackId}
-            data={data}
+            trackData={trackData}
             updateTrigger_cbfn={updateTrigger_cbfn}
           />
         )}

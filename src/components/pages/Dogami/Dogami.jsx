@@ -1,14 +1,22 @@
 import useGetBackendData from "../../../hooks/useGetBackendData";
 
+import { useState } from "react";
+
 import { Link, useParams } from "react-router-dom";
 
+import DogamiStratAddForm from "../../composites/StrategyAddForm";
+
 const Dogami = () => {
-  // params not needed as JWT _id used
   const { dogamiId } = useParams();
+
+  // trigger for the custom hook
+  const [updateTrigger, setUpdateTrigger] = useState(new Date());
+  const updateTrigger_cbfn = (timestamp) => setUpdateTrigger(timestamp);
 
   // custom hook
   const { data, error, loading } = useGetBackendData(
-    `/dogamis/${dogamiId}/frontend-dogami-page`
+    `/dogamis/${dogamiId}/frontend-dogami-page`,
+    updateTrigger
   );
 
   if (loading) return <p>Loading...</p>;
@@ -36,6 +44,16 @@ const Dogami = () => {
 
         <DogStratsDisplay dogStatsData={data.dogStrats} />
         <Link to="/dashboard">Return to dashboard</Link>
+
+        {data && (
+          <DogamiStratAddForm
+            dogamiId={dogamiId}
+            isTrackUserProvided={true}
+            trackId={null}
+            trackData={data}
+            updateTrigger_cbfn={updateTrigger_cbfn}
+          />
+        )}
       </div>
     </>
   );

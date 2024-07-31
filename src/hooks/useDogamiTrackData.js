@@ -10,43 +10,37 @@ import { axiosBackendGet } from "../lib/axiosRequests/axiosBackendEndpoints";
  */
 
 const useDogamiTrackData = (dogamiId, trackId, updateTrigger) => {
-  const [data, setData] = useState(null);
+  const [trackData, setTrackData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getData = async () => {
+    const getTrackData = async () => {
       try {
-        const [dogami, track, strats, powers, consumables] = await Promise.all([
+        const [dogami, track, strats] = await Promise.all([
           axiosBackendGet(`dogamis/${dogamiId}`),
           axiosBackendGet(`tracks/${trackId}`),
           axiosBackendGet(`dogamis/${dogamiId}/strats?track_id=${trackId}`),
-          axiosBackendGet(`powers`),
-          axiosBackendGet(`consumables`),
         ]);
 
         // console.log("dogami.data", dogami.data);
         // console.log("track.data", track.data);
         // console.log("strat.data", strat.data);
-        // console.log("powers.data", powers.data);
-        // console.log("consumables.data", consumables.data);
 
-        setData({
+        setTrackData({
           dogami: dogami.data,
           track: track.data,
           dogamiStrats: strats.data,
-          powers: powers.data,
-          consumables: consumables.data,
         });
       } catch (error) {
         setError(error);
       }
       setLoading(false);
     };
-    getData();
+    getTrackData();
   }, [updateTrigger]);
 
-  return { data, error, loading };
+  return { trackData, error, loading };
 };
 
 export default useDogamiTrackData;
