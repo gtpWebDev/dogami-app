@@ -1,7 +1,8 @@
 // export const BACKEND_URI =
 //   "https://skeleton-jwt-auth-production.up.railway.app";
 
-export const BACKEND_URI = "http://localhost:3000";
+export const BACKEND_URI =
+  "https://dogami-backend-production-4978.up.railway.app";
 
 export const REGISTER_URI = BACKEND_URI + "/user/register";
 export const LOGIN_URI = BACKEND_URI + "/user/login";
