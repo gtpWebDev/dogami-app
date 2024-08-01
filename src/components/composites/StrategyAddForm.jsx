@@ -21,9 +21,9 @@ const DogamiStratAddForm = (props) => {
   const { stratAddData, error, loading } = useStratAddData();
 
   const [isPrivate, setIsPrivate] = useState(false);
-  const [powerOne, setPowerOne] = useState(null);
-  const [powerTwo, setPowerTwo] = useState(null);
-  const [consumable, setConsumable] = useState(null);
+  const [powerOne, setPowerOne] = useState("");
+  const [powerTwo, setPowerTwo] = useState("");
+  const [consumable, setConsumable] = useState("");
   const [bestTime, setBestTime] = useState(0);
 
   // if track is user provided, initiate null and allow user to provide

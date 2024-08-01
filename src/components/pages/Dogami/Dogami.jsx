@@ -1,10 +1,10 @@
-import useGetBackendData from "../../../hooks/useGetBackendData";
-
 import { useState } from "react";
-
 import { Link, useParams } from "react-router-dom";
 
+import useGetBackendData from "../../../hooks/useGetBackendData";
 import DogamiStratAddForm from "../../composites/StrategyAddForm";
+
+import { Paper } from "@mui/material";
 
 const Dogami = () => {
   const { dogamiId } = useParams();
@@ -36,7 +36,7 @@ const Dogami = () => {
   }
 
   return (
-    <>
+    <Paper elevation={3} square>
       <h3>Dogami: {data.dogami.name}</h3>
       <div>
         <p>You are authorized!</p>
@@ -55,7 +55,7 @@ const Dogami = () => {
           />
         )}
       </div>
-    </>
+    </Paper>
   );
 };
 

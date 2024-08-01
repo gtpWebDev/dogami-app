@@ -2,6 +2,8 @@ import { useState } from "react";
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
+import { FormButton } from "../../primitives/buttons";
+
 import {
   LOGIN_URI,
   HEADER_JSON_CONFIG,
@@ -43,25 +45,31 @@ const Login = () => {
       <h3>Login Page</h3>
 
       <form method="post" onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="text"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
-        <input type="submit" value="Submit" />
+        <p>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </p>
+        <p>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="text"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </p>
+        <p>
+          <FormButton type="submit" variant="contained">
+            Submit
+          </FormButton>
+        </p>
         {/* Message for login issues */}
         {loginMsg.length > 0 ? <p>{loginMsg}</p> : <></>}
       </form>

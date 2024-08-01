@@ -1,10 +1,14 @@
-import "./App.css";
-
-import PropTypes from "prop-types";
+// import "./App.css";
 
 import { Outlet, Link } from "react-router-dom";
 
 import ScrollToTop from "./scrollToTop";
+
+import TitleBar from "./components/layouts/TitleBar";
+import NavBar from "./components/layouts/NavBar";
+
+// Material UI imports
+import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
 
 /**
  *
@@ -20,39 +24,43 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <TitleBar />
-      <NavBar />
-      <Sidebar />
-      <main>
-        <h2>Main Content</h2>
-        <Outlet />
-      </main>
-      <Footer />
+      <Container maxWidth="xl" disableGutters={true}>
+        <Grid container direction="column">
+          {/* Fancy title bar, no function, scrolls off */}
+          <TitleBar />
+
+          {/* Functional application bar */}
+          <NavBar />
+
+          <Sidebar />
+
+          <MainArea />
+
+          <Footer />
+        </Grid>
+      </Container>
     </>
   );
 }
 
-const TitleBar = () => {
-  return (
-    <header>
-      <h1>Title Bar</h1>
-      <hr />
-    </header>
-  );
-};
+/**
+ * Title bar which scrolls off the screen
+ * Note, this is above the app bar that provides links and functionality
+ */
 
-const NavBar = () => {
+const MainArea = () => {
+  // Container centres content for all routes, widest possible
   return (
-    <nav>
-      <h2>Nav Bar</h2>
-      <Link to="/">Return to home</Link>
-      <hr />
-    </nav>
+    <Container maxWidth="xl">
+      <main>
+        <Outlet />
+      </main>
+    </Container>
   );
 };
 
 const Sidebar = () => {
-  <aside>{/* Empty currently */}</aside>;
+  <aside>hello{/* Empty currently */}</aside>;
 };
 
 const Footer = () => {
