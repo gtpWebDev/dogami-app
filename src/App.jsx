@@ -13,7 +13,8 @@ import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
 /**
  *
  * Front-end to do list:
- * - Add logic that if doagmi status is "Box" they can't be added to the backend.
+ *
+ * - Add modular to check before deleting dogs.
  * - Review and implement useContext where sensible.
  * - Implement a structure for managing the logged in user:
  *    - reflecting the logged in user in the nav bar

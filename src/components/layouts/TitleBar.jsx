@@ -1,6 +1,7 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { StyledCentredBox } from "../primitives/boxes";
+import { StyledTitleHeader } from "../primitives/typography";
+
+import backgroundImage from "../../assets/dogami-header.jpg";
 
 /**
  * This TitleBar component sits above the actual App Bar
@@ -10,37 +11,19 @@ import Typography from "@mui/material/Typography";
 
 export const TitleBar = () => {
   return (
-    <Grid
-      item
-      xs={12}
+    <StyledCentredBox
+      minHeight="200px"
+      // alignItems="center"
+      container="header"
       sx={{
-        // backgroundImage: `url(${titleBackground})`,
+        backgroundImage: `url(${backgroundImage})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundColor: "primary.main",
       }}
     >
-      <Box
-        minHeight="200px"
-        alignItems="center"
-        container="header"
-        sx={{
-          // // easy center of the item
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <Typography
-          fontSize={{ xs: "50px", sm: "60px", md: "70px" }}
-          fontWeight="bold"
-          color="#ffffff"
-          sx={{ textShadow: "3px 3px black" }}
-        >
-          Dogami App
-        </Typography>
-      </Box>
-    </Grid>
+      <StyledTitleHeader>Dogami App</StyledTitleHeader>
+    </StyledCentredBox>
   );
 };
 

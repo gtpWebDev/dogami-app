@@ -6,14 +6,17 @@ import AuthService from "../../../lib/AuthService";
 import { Link } from "react-router-dom";
 
 import DogamiDisplayArea from "./DogamiDisplayArea";
-import DogamiAddForm from "./DogamiAddForm";
-import AccountAddForm from "./AccountAddForm";
+import AddDogamiModal from "./AddDogamiModal";
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
-const Dashboard = () => {
+import { SectionHeader } from "../../primitives/typography";
+
+function Dashboard() {
   // trigger for the custom hook
   const [updateTrigger, setUpdateTrigger] = useState(new Date());
   const updateTrigger_cbfn = (timestamp) => setUpdateTrigger(timestamp);
@@ -32,7 +35,7 @@ const Dashboard = () => {
       updateTrigger_cbfn={updateTrigger_cbfn}
     />
   );
-};
+}
 
 const AuthorisedContent = (props) => {
   const logout = () => {
@@ -43,44 +46,32 @@ const AuthorisedContent = (props) => {
   return (
     <Grid container spacing={2} align="center">
       <Grid item xs={12}>
-        <Typography
-          component="h3"
-          variant="h3"
-          fontSize={{ xs: "40px", sm: "50px" }}
-          sx={{
-            color: "primary.main",
-            fontWeight: "bold",
-            margin: "10px",
-            padding: "15px 0",
-          }}
-        >
-          Dashboard
-        </Typography>
+        <SectionHeader>Dashboard</SectionHeader>
+      </Grid>
+
+      <Grid item xs={12}>
+        <AddDogamiModal updateTrigger_cbfn={props.updateTrigger_cbfn} />
       </Grid>
 
       <Grid item xs={12}>
         <Paper elevation={5}>
-          <Typography component="h4" variant="h4" sx={{ padding: "20px 0" }}>
-            You own {props.backendData.owned_dogs.length} dogs
-          </Typography>
-
-          <DogamiDisplayArea
-            dogData={props.backendData.owned_dogs}
-            updateTrigger_cbfn={props.updateTrigger_cbfn}
-          />
+          <Stack pb={3}>
+            <Typography component="h4" variant="h4" sx={{ padding: "20px 0" }}>
+              You own {props.backendData.owned_dogs.length} dogs
+            </Typography>
+            <DogamiDisplayArea
+              dogData={props.backendData.owned_dogs}
+              updateTrigger_cbfn={props.updateTrigger_cbfn}
+            />
+          </Stack>
         </Paper>
       </Grid>
 
       <Grid item xs={12}>
-        <DogamiAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
+        <Button onClick={logout} variant="contained">
+          Logout
+        </Button>
       </Grid>
-
-      <Grid item xs={12}>
-        <AccountAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
-      </Grid>
-      <p>
-        <button onClick={logout}>logout</button>
-      </p>
     </Grid>
   );
 };

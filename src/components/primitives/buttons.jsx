@@ -7,3 +7,10 @@ export const FormButton = ({ children, type = "submit", label, onClick }) => {
     </Button>
   );
 };
+
+import { styled } from "@mui/system";
+
+export const StyledButton = styled(Button)(() => ({
+  backgroundColor: "#ff00ff",
+  height: 15,
+}));
