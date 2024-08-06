@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 
 import CompositeLink from "../primitives/links";
 
+import CustomPaper from "../styledComponents/paper";
+
 /**
  * Display with 2 sections - info and image
  * Third section below uses composition for optional additions.
@@ -19,10 +21,7 @@ const DogamiDisplay = ({ children, dogami }) => {
   // }, []);
 
   return (
-    <Paper
-      elevation={5}
-      sx={{ backgroundColor: "primary.main", padding: "15px 0" }}
-    >
+    <CustomPaper elevation={6} sx={{ padding: "15px 0" }}>
       <Grid container direction="column" spacing={1}>
         <Grid item>
           <CompositeLink linkLoc={`/dogami/${dogami._id}`}>
@@ -54,7 +53,7 @@ const DogamiDisplay = ({ children, dogami }) => {
 
         <Grid item>{children}</Grid>
       </Grid>
-    </Paper>
+    </CustomPaper>
   );
 };
 

@@ -52,7 +52,7 @@ function App() {
 const MainArea = () => {
   // Container centres content for all routes, widest possible
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ backgroundColor: "primary.main" }}>
       <main>
         <Outlet />
       </main>

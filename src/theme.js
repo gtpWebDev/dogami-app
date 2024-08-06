@@ -7,12 +7,15 @@ import { red } from "@mui/material/colors";
  * e.g. red[500]
  */
 
+// when generating theme can't reference theme!
+const primaryMain = "#1E0356";
+
 // Create a theme instance.
 let theme = createTheme({
   palette: {
     // Everything defaults to primary
     primary: {
-      main: "#1E0356",
+      main: primaryMain,
       contrastText: "#ffffff",
       // light: // can set up light and dark mode
       // dark:
@@ -31,6 +34,13 @@ let theme = createTheme({
   },
   // Stack defaults - center
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: primaryMain,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         // seems to work with specificity

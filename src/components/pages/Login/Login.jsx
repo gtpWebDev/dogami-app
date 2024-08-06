@@ -2,7 +2,7 @@ import { useState } from "react";
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
-import { FormButton } from "../../primitives/buttons";
+import { StyledButton } from "../../primitives/buttons";
 
 import {
   LOGIN_URI,
@@ -66,9 +66,9 @@ const Login = () => {
           />
         </p>
         <p>
-          <FormButton type="submit" variant="contained">
+          <StyledButton type="submit" variant="contained">
             Submit
-          </FormButton>
+          </StyledButton>
         </p>
         {/* Message for login issues */}
         {loginMsg.length > 0 ? <p>{loginMsg}</p> : <></>}

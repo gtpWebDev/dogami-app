@@ -11,6 +11,8 @@ export const FormButton = ({ children, type = "submit", label, onClick }) => {
 import { styled } from "@mui/system";
 
 export const StyledButton = styled(Button)(() => ({
-  backgroundColor: "#ff00ff",
-  height: 15,
+  color: "secondary",
+  // height: 25,
+  disableRipple: true,
+  borderRadius: "10px",
 }));
