@@ -13,7 +13,7 @@ import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
 /**
  *
  * Front-end to do list:
- *
+ *  - CHeck behaviur at very thinnest / mobile
  * - Add modular to check before deleting dogs.
  * - Review and implement useContext where sensible.
  * - Implement a structure for managing the logged in user:

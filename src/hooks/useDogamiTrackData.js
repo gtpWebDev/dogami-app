@@ -10,24 +10,42 @@ import { axiosBackendGet } from "../lib/axiosRequests/axiosBackendEndpoints";
  */
 
 const useDogamiTrackData = (dogamiId, trackId, updateTrigger) => {
-  const [trackData, setTrackData] = useState(null);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getTrackData = async () => {
+    const getData = async () => {
       try {
+        /**
+         * Axios functions setup not to generate errors.
+         * Potentially makes life harder!
+         * Returns:
+         *  .success true, .data, .error null
+         *  or
+         *  .success false, data null, error {status and message}
+         */
         const [dogami, track, strats] = await Promise.all([
           axiosBackendGet(`dogamis/${dogamiId}`),
           axiosBackendGet(`tracks/${trackId}`),
           axiosBackendGet(`dogamis/${dogamiId}/strats?track_id=${trackId}`),
         ]);
 
-        // console.log("dogami.data", dogami.data);
-        // console.log("track.data", track.data);
-        // console.log("strat.data", strat.data);
+        if (!dogami.success) {
+          throw new Error(dogami.error.message);
+        }
+        if (!track.success) {
+          throw new Error(track.error.message);
+        }
+        if (!strats.success) {
+          throw new Error(strats.error.message);
+        }
 
-        setTrackData({
+        // console.log("dogami", dogami);
+        // console.log("track", track);
+        // console.log("strats", strats);
+
+        setData({
           dogami: dogami.data,
           track: track.data,
           dogamiStrats: strats.data,
@@ -37,10 +55,10 @@ const useDogamiTrackData = (dogamiId, trackId, updateTrigger) => {
       }
       setLoading(false);
     };
-    getTrackData();
+    getData();
   }, [updateTrigger]);
 
-  return { trackData, error, loading };
+  return { data, error, loading };
 };
 
 export default useDogamiTrackData;

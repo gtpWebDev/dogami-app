@@ -7,6 +7,7 @@ import { styled } from "@mui/system";
  */
 
 const CustomPaper = styled(Box)(({ theme, elevation }) => ({
+  borderRadius: "10px",
   backgroundColor: theme.palette.primary.main,
   boxShadow:
     elevation === 3

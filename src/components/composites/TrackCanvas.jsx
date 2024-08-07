@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-import trackTemplates from "../../constants/trackTemplates";
-
-const TrackCanvas = ({ trackName, fullWidth = 200 }) => {
+const TrackCanvas = ({ drawArray, fullWidth = 200 }) => {
   const canvasRef = useRef(null);
 
   const height = 0.2 * fullWidth;
@@ -18,18 +16,11 @@ const TrackCanvas = ({ trackName, fullWidth = 200 }) => {
     let yMidHeight = height * (1 - 2 * edgeHeightPerc);
     let yBottomHeight = height * edgeHeightPerc;
 
-    // collect colours and sizes
-    const trackInfo = trackTemplates.find(
-      (element) => element.track === trackName
-    );
-
-    const trackDrawArray = trackInfo ? trackInfo.drawArray : [];
-
-    const scaler = getScalingFactor(trackDrawArray, fullWidth);
+    const scaler = getScalingFactor(drawArray, fullWidth);
 
     // Iterate over the rectangles array and draw each rectangle
-    trackDrawArray.forEach((rect) => {
-      const originalColor = rect.color;
+    drawArray.forEach((rect) => {
+      const originalColor = rect.skill.colour;
       const darkerColor = darkenColor(originalColor, 20);
 
       // bottom edge
