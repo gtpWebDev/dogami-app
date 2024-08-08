@@ -5,7 +5,6 @@ import DogamiDisplay from "../../composites/DogamiDisplay";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Alert from "@mui/material/Alert";
-import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -37,31 +36,10 @@ const style = {
 };
 
 /**
- * Modal structure - button to open and the modal itself
+ * This form to be used in a modal
  */
 
-export default function AddDogamiModal(props) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add a Dogami
-      </Button>
-      <Modal open={open} onClose={handleClose}>
-        <DogamiAddForm {...props} />
-      </Modal>
-    </div>
-  );
-}
-
-/**
- *
- */
-
-const DogamiAddForm = (props) => {
+export const DogamiAddForm = (props) => {
   const [dogami, setDogami] = useState(null);
   const [addDogamiMsg, setAddDogamiMsg] = useState(null);
 

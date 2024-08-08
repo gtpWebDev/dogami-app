@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import useGetBackendData from "../../../hooks/useGetBackendData";
-import DogamiStratAddForm from "../../composites/StrategyAddForm";
 
 import { Paper } from "@mui/material";
 
@@ -45,15 +44,18 @@ const Dogami = () => {
         <DogStratsDisplay dogStatsData={data.dogStrats} />
         <Link to="/dashboard">Return to dashboard</Link>
 
-        {data && (
-          <DogamiStratAddForm
-            dogamiId={dogamiId}
-            isTrackUserProvided={true}
-            trackId={null}
-            trackData={data}
-            updateTrigger_cbfn={updateTrigger_cbfn}
-          />
-        )}
+        <p></p>
+        {
+          "Form params here"
+          // Kept this here as has params, otherwise COmponent's gone
+          // <DogamiStratAddForm
+          //   dogamiId={dogamiId}
+          //   isTrackUserProvided={true}
+          //   trackId={null}
+          //   trackData={data}
+          //   updateTrigger_cbfn={updateTrigger_cbfn}
+          // />
+        }
       </div>
     </Paper>
   );

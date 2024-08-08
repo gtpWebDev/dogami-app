@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { styled } from "@mui/system";
 
 export const FormButton = ({ children, type = "submit", label, onClick }) => {
   return (
@@ -8,11 +9,8 @@ export const FormButton = ({ children, type = "submit", label, onClick }) => {
   );
 };
 
-import { styled } from "@mui/system";
-
 export const StyledButton = styled(Button)(() => ({
   color: "secondary",
-  // height: 25,
   disableRipple: true,
   borderRadius: "10px",
 }));

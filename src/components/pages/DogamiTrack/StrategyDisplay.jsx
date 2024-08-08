@@ -11,13 +11,18 @@ import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpo
 
 import GameItemsSVG from "../../composites/GameItemsSVG";
 
-import { StyledButton } from "../../primitives/buttons";
+import { StyledButton } from "../../styledComponents/buttons.jsx";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import { GridRowItemsCentred } from "../../styledComponents/grid";
+import { BoxContentCentred } from "../../styledComponents/box";
+
 import CustomPaper from "../../styledComponents/paper";
+
+import StrategyFormModal from "../../composites/StrategyFormModal.jsx";
 
 const StrategyDisplay = (props) => {
   return props.strats.map((element) => (
@@ -26,21 +31,13 @@ const StrategyDisplay = (props) => {
         dogamiId={props.dogamiId}
         updateTrigger_cbfn={props.updateTrigger_cbfn}
         strat={element}
+        track={props.track}
       />
     </div>
   ));
 };
 
 const StrategyItem = (props) => {
-  const sectionStyle = {
-    height: "90px",
-    py: 4,
-    px: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
   return (
     <>
       <Box sx={{ flexGrow: 1, padding: 2 }}>
@@ -48,22 +45,19 @@ const StrategyItem = (props) => {
           <Grid container spacing={0.2}>
             {/* STONES AND CONSUMABLES */}
             <Grid item xs={12} md>
-              <ItemsSection strat={props.strat} sectionStyle={sectionStyle} />
+              <ItemsSection strat={props.strat} />
             </Grid>
 
             {/* BEST TIME */}
             <Grid item xs={12} md={3}>
-              <BestTimeSection
-                bestTime={props.strat.strat_best_time}
-                sectionStyle={sectionStyle}
-              />
+              <BestTimeSection bestTime={props.strat.strat_best_time} />
             </Grid>
 
             {/* UPDATE / DELETE BUTTONS */}
             <Grid item xs={12} md="auto">
               <ActionSection
                 strat={props.strat}
-                sectionStyle={sectionStyle}
+                track={props.track}
                 dogamiId={props.dogamiId}
                 updateTrigger_cbfn={props.updateTrigger_cbfn}
               />
@@ -77,13 +71,8 @@ const StrategyItem = (props) => {
 
 const ItemsSection = (props) => {
   return (
-    <Box sx={props.sectionStyle}>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        spacing={{ xs: 1, sm: 2, lg: 5, xl: 7 }}
-      >
+    <BoxContentCentred sx={{ height: "90px", py: 4, px: 1 }}>
+      <GridRowItemsCentred container spacing={{ xs: 1, sm: 2, lg: 5, xl: 7 }}>
         <Grid item>
           <GameItem item={props.strat.power_1} type="powerstone" />
         </Grid>
@@ -93,25 +82,33 @@ const ItemsSection = (props) => {
         <Grid item>
           <GameItem item={props.strat.consumable_1} type="consumable" />
         </Grid>
-      </Grid>
-    </Box>
+      </GridRowItemsCentred>
+    </BoxContentCentred>
   );
 };
 
 const ActionSection = (props) => {
   return (
-    <Box sx={props.sectionStyle}>
-      <Grid container justifyContent="center" alignItems="center" spacing={1}>
+    <BoxContentCentred
+      sx={{ height: { xs: "50px", md: "90px" }, py: 4, px: 1 }}
+    >
+      <GridRowItemsCentred container spacing={1}>
         <Grid item>
-          <StyledButton variant="contained" color="secondary">
-            Update
-          </StyledButton>
+          <StrategyFormModal
+            openButtonText="Update"
+            dogamiId={props.dogamiId}
+            stratDetails={props.strat}
+            trackDetails={props.track}
+            updateTrigger_cbfn={props.updateTrigger_cbfn}
+            isUpdate={true}
+            trackIdLocked={true}
+          />
         </Grid>
         <Grid item>
           <DeleteStratButton {...props} />
         </Grid>
-      </Grid>
-    </Box>
+      </GridRowItemsCentred>
+    </BoxContentCentred>
   );
 };
 
@@ -147,9 +144,13 @@ const DeleteStratButton = (props) => {
 
 const BestTimeSection = (props) => {
   return (
-    <Typography variant="h5" color="primary.contrastText">
-      <Box sx={props.sectionStyle}>{props.bestTime.toFixed(3)}</Box>
-    </Typography>
+    <BoxContentCentred
+      sx={{ height: { xs: "50px", md: "90px" }, py: 4, px: 1 }}
+    >
+      <Typography variant="h5" color="primary.contrastText">
+        {props.bestTime.toFixed(3)}
+      </Typography>
+    </BoxContentCentred>
   );
 };
 

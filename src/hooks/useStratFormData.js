@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import { axiosBackendGet } from "../lib/axiosRequests/axiosBackendEndpoints";
 
 /**
- * Collecting from a few endpoints to inform the add strategy form:
+ * Collecting from a few endpoints to inform the update and add strategy form:
  * - powers
  * - consumables
  * - tracks
  */
 
-const useStratAddData = () => {
-  const [stratAddData, setStratAddData] = useState(null);
+const useStratFormData = () => {
+  const [stratFormData, setStratFormData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getStratAddData = async () => {
+    const getStratFormData = async () => {
       try {
         const [powers, consumables, tracks] = await Promise.all([
           axiosBackendGet(`powers`),
@@ -22,10 +22,7 @@ const useStratAddData = () => {
           axiosBackendGet(`tracks`),
         ]);
 
-        // console.log("powers.data", powers.data);
-        // console.log("consumables.data", consumables.data);
-
-        setStratAddData({
+        setStratFormData({
           powers: powers.data,
           consumables: consumables.data,
           tracks: tracks.data,
@@ -35,10 +32,10 @@ const useStratAddData = () => {
       }
       setLoading(false);
     };
-    getStratAddData();
+    getStratFormData();
   }, []);
 
-  return { stratAddData, error, loading };
+  return { stratFormData, error, loading };
 };
 
-export default useStratAddData;
+export default useStratFormData;

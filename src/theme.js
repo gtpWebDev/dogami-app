@@ -50,7 +50,7 @@ let theme = createTheme({
           borderRadius: 10,
         },
         containedPrimary: {
-          // only overrise for contained and primary instances of button
+          // only override for contained and primary instances of button
           borderRadius: 10,
         },
       },

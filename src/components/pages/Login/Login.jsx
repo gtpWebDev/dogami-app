@@ -2,7 +2,7 @@ import { useState } from "react";
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
-import { StyledButton } from "../../primitives/buttons";
+import { StyledButton } from "../../styledComponents/buttons";
 
 import {
   LOGIN_URI,

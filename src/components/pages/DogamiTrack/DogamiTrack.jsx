@@ -10,9 +10,15 @@ import TrackSection from "./TrackSection";
 import StrategyDisplay from "./StrategyDisplay";
 
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+
+import { BoxContentCentred } from "../../styledComponents/box";
+
+import { StrategyForm } from "./StrategyForm";
+
+import AddModal from "../../composites/AddModal";
 
 import { Navigate } from "react-router-dom";
 
@@ -36,7 +42,7 @@ const DogamiTrack = () => {
   if (error) return <Navigate to={`/errorPage`} replace={false} />;
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={4}>
       <Grid item xs={12} mt={2}>
         <Typography
           variant="body2"
@@ -54,7 +60,11 @@ const DogamiTrack = () => {
 
       {/* Track section full width always */}
       <Grid item xs={12} mt={2}>
-        <TrackSection trackData={data.track} />
+        <TrackSection
+          dogamiId={dogamiId}
+          trackData={data.track}
+          updateTrigger_cbfn={updateTrigger_cbfn}
+        />
       </Grid>
 
       {/* Next row, full width, grid styling can possibly be tidied up */}
@@ -68,25 +78,18 @@ const DogamiTrack = () => {
               justifyContent: "center",
             }}
           >
-            {/* Dog display always auto width */}
+            {/* Dog display, and add strategy button below, always auto width */}
             <Grid item xs="auto">
               <DogamiDisplay dogami={data.dogami} />
             </Grid>
             {/* Strategy display below for xs, to the right form small upwards */}
             <Grid item xs={12} sm>
-              <Paper
-                sx={{
-                  width: "100%",
-                  backgroundColor: "primary.main",
-                  padding: 2,
-                }}
-              >
-                <StrategyDisplay
-                  strats={data.dogamiStrats}
-                  dogamiId={dogamiId}
-                  updateTrigger_cbfn={updateTrigger_cbfn}
-                />
-              </Paper>
+              <StrategyDisplay
+                strats={data.dogamiStrats}
+                track={data.track}
+                dogamiId={dogamiId}
+                updateTrigger_cbfn={updateTrigger_cbfn}
+              />
             </Grid>
           </Grid>
         </Box>

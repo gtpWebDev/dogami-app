@@ -6,6 +6,8 @@ import CustomPaper from "../../styledComponents/paper";
 
 import TrackCanvas from "../../composites/TrackCanvas";
 
+import StrategyFormModal from "../../composites/StrategyFormModal";
+
 const TrackSection = (props) => {
   const boxStyle = {
     // backgroundColor: "primary.main",
@@ -25,6 +27,17 @@ const TrackSection = (props) => {
             <TrackCanvas
               drawArray={props.trackData.draw_array}
               fullWidth={250}
+            />
+          </Box>
+          <Box pb={2}>
+            <StrategyFormModal
+              openButtonText="Add a Strategy"
+              dogamiId={props.dogamiId}
+              stratDetails={null}
+              trackDetails={props.trackData}
+              updateTrigger_cbfn={props.updateTrigger_cbfn}
+              isUpdate={false}
+              trackIdLocked={true}
             />
           </Box>
         </Stack>

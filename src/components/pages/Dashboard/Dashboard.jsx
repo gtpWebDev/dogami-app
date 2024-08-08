@@ -6,8 +6,10 @@ import AuthService from "../../../lib/AuthService";
 import { Link } from "react-router-dom";
 
 import DogamiDisplayArea from "./DogamiDisplayArea";
-import AddDogamiModal from "./AddDogamiModal";
+import AddModal from "../../composites/AddModal";
+import { DogamiAddForm } from "./AddDogamiForm";
 
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -50,7 +52,12 @@ const AuthorisedContent = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <AddDogamiModal updateTrigger_cbfn={props.updateTrigger_cbfn} />
+        <AddModal buttonText="Add a Dogami">
+          <Box>
+            {/* Material UI modal requires a pure Material UI child */}
+            <DogamiAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
+          </Box>
+        </AddModal>
       </Grid>
 
       <Grid item xs={12}>
