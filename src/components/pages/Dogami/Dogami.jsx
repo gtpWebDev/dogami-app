@@ -7,12 +7,15 @@ import StrategyFormModal from "../../composites/StrategyFormModal";
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { SectionHeader, TimeText } from "../../styledComponents/typography";
 import CustomPaper from "../../styledComponents/paper";
 
 import CompositeLink from "../../primitives/links";
+
+import { GameItem } from "../../composites/GameItemsSVG";
 
 import TrackCanvas from "../../composites/TrackCanvas";
 const Dogami = () => {
@@ -36,18 +39,6 @@ const Dogami = () => {
     `/dogamis/${dogamiId}/frontend-dogami-page`,
     updateTrigger
   );
-
-  const tempStratArray = [
-    { id: 1, name: "C1" },
-    { id: 2, name: "C2" },
-    { id: 3, name: "C3" },
-    { id: 4, name: "C1" },
-    { id: 5, name: "C2" },
-    { id: 6, name: "C3" },
-    { id: 7, name: "C1" },
-    { id: 8, name: "C2" },
-    { id: 9, name: "C3" },
-  ];
 
   if (loading) return <p>Loading...</p>;
 
@@ -199,17 +190,9 @@ const IndividualStratDisplay = ({ strat, dogamiId }) => {
       <CompositeLink linkLoc={`/dogami/${dogamiId}/track/${strat.track_id}`}>
         <CustomPaper elevation={5}>
           <Track trackDetails={strat.trackDetails} />
-          <Grid container>
-            <Grid item xs={4}>
-              <GameItem gameItem={strat.power_1} />
-            </Grid>
-            <Grid item xs={4}>
-              <GameItem gameItem={strat.power_2} />
-            </Grid>
-            <Grid item xs={4}>
-              <GameItem gameItem={strat.consumable_1} />
-            </Grid>
-          </Grid>
+
+          <GameItems strat={strat} />
+
           <BestTimeDisplay bestTime={strat.strat_best_time} />
         </CustomPaper>
       </CompositeLink>
@@ -219,21 +202,29 @@ const IndividualStratDisplay = ({ strat, dogamiId }) => {
 
 const Track = ({ trackDetails }) => {
   return (
-    <>
+    <Box pb={1}>
       <Typography variant="h6" pt={1} sx={{ color: "primary.contrastText" }}>
         Track {trackDetails.name}
       </Typography>
 
       <TrackCanvas drawArray={trackDetails.draw_array} fullWidth={250} />
-    </>
+    </Box>
   );
 };
 
-const GameItem = ({ gameItem }) => {
+const GameItems = ({ strat }) => {
   return (
-    <Typography variant="body1" p={2} sx={{ color: "primary.contrastText" }}>
-      Game item
-    </Typography>
+    <Grid container>
+      <Grid item xs={4}>
+        <GameItem item={strat.power_1} type="powerstone" />
+      </Grid>
+      <Grid item xs={4}>
+        <GameItem item={strat.power_2} type="powerstone" />
+      </Grid>
+      <Grid item xs={4}>
+        <GameItem item={strat.consumable_1} type="consumable" />
+      </Grid>
+    </Grid>
   );
 };
 

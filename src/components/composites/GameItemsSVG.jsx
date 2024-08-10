@@ -1,11 +1,68 @@
 import React from "react";
 
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
+import { v4 as uuidv4 } from "uuid";
+
 /**
  * Generates icons for power stones and consumables with colours from
  * skills.
  * Receives a colour array.
  * Also receives track strat _id to create a unique reference as required in the SVG path
  */
+
+export const GameItem = ({ item, type }) => {
+  const power1ColourArray = () => {
+    let array = [];
+    item.skills.forEach((skill) => {
+      array.push(skill.colour);
+    });
+    return array;
+  };
+
+  return (
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Grid item>
+        <GameItemText item={item} />
+      </Grid>
+      <Grid item>
+        <GameItemsSVG
+          item={type}
+          colorArray={power1ColourArray()}
+          id={uuidv4()}
+          width={50}
+          height={50}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
+const GameItemText = ({ item }) => {
+  const skillsText = () => {
+    const output =
+      item.name === "Dragon"
+        ? "All"
+        : item.skills.length === 1
+        ? item.skills[0].name.substring(0, 3)
+        : item.skills[0].name.substring(0, 3) +
+          "/" +
+          item.skills[1].name.substring(0, 3);
+    return output;
+  };
+
+  return (
+    <Typography variant="body2" color="primary.contrastText">
+      {skillsText()}
+    </Typography>
+  );
+};
 
 export const GameItemsSVG = ({ item, colorArray, id, width, height }) => {
   /**

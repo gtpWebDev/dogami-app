@@ -96,7 +96,7 @@ export const StrategyFormContent = (props) => {
   // Not used yet
   const [addStratMsg, setAddStratMsg] = useState(null);
 
-  // track page - track is locked, dogami page, track user provided
+  // track page - track is locked, dogami page, track is user provided
   const [trackId, setTrackId] = useState(
     props.trackIdLocked ? props.trackDetails._id : ""
   );
@@ -176,11 +176,16 @@ export const StrategyFormContent = (props) => {
             autoComplete="off"
             onSubmit={submitToBackend}
           >
-            <TrackIdInput
-              trackIdLocked={props.trackIdLocked}
-              trackDetails={props.trackDetails}
-              onChange={handleTrackChange}
-            />
+            {!props.trackIdLocked ? (
+              <DropdownInput
+                labelText="Track: "
+                options={stratFormData.tracks}
+                onChange={handleTrackChange}
+                value={trackId}
+              />
+            ) : (
+              <></>
+            )}
 
             <IsPrivateInput
               isPrivate={isPrivate}
@@ -237,32 +242,6 @@ const ModalTitle = ({ isUpdate }) => {
         </Typography>
       </Box>
     </Grid>
-  );
-};
-
-const TrackIdInput = (props) => {
-  return (
-    <Box pb={1}>
-      {props.trackIdLocked ? (
-        <TextField
-          id="track-id"
-          type="text"
-          label="Track"
-          value={props.trackDetails.name}
-          disabled
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-      ) : (
-        <p>add track</p>
-        // Add track dropdown alternative for dogami page!!!
-        // <Dropdown
-        //   labelText="Track: "
-        //   options={stratFormData.tracks}
-        //   onChange={handleTrackChange}
-        //   value={trackId}
-        // />
-      )}
-    </Box>
   );
 };
 

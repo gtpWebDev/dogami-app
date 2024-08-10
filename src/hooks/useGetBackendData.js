@@ -15,6 +15,8 @@ const useGetBackendData = (relativeUri, updateTrigger) => {
       try {
         const response = await axiosBackendGet(relativeUri);
 
+        // console.log("backend response", response);
+
         if (response.success) {
           setData(response.data);
         } else {
