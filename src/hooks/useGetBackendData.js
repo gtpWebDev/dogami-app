@@ -14,16 +14,14 @@ const useGetBackendData = (relativeUri, updateTrigger) => {
     const getData = async () => {
       try {
         const response = await axiosBackendGet(relativeUri);
+
         if (response.success) {
-          // console.log("response.data", response.data);
           setData(response.data);
         } else {
           setError(response.error);
         }
         setLoading(false);
-        // console.log("Custom hook returning handled response");
       } catch (error) {
-        // console.log("Custom hook returning unhandled response");
         setError(error);
         setLoading(false);
       }

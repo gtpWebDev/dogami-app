@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { SectionHeader } from "../../primitives/typography";
+import { SectionHeader } from "../../styledComponents/typography";
 
 function HomePage() {
   return (

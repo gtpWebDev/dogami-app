@@ -1,5 +1,5 @@
 import { StyledCentredBox } from "../primitives/boxes";
-import { StyledTitleHeader } from "../primitives/typography";
+import { StyledTitleHeader } from "../styledComponents/typography";
 
 import backgroundImage from "../../assets/dogami-header.jpg";
 

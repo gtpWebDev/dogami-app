@@ -36,14 +36,22 @@ const style = {
 };
 
 /**
+ *
+ * Modal that caters for:
+ * - Adding a strategy, with given trackId - complete
+ * - Updating a strategy, with given trackId - complete
+ * - Adding a strategy, user provides trackId - NOT TESTED
+ *
+ * (User provided through JWT)
+ *
  * Props:
- * openButtonText - e.g. "Add a Strategy"
- * dogamiId
- * stratDetails - (null if adding)
- * trackDetails - for track id and name
- * updateTrigger_cbfn
- * isUpdate - true or false
- * trackIdLocked - true or false
+ * - openButtonText - e.g. "Add a Strategy"
+ * - dogamiId
+ * - stratDetails - (null if adding)
+ * - trackDetails - for track id and name
+ * - updateTrigger_cbfn
+ * - isUpdate - true or false
+ * - trackIdLocked - true or false
  */
 
 export default function StrategyFormModal(props) {
@@ -67,7 +75,7 @@ export default function StrategyFormModal(props) {
 }
 
 export const StrategyFormContent = (props) => {
-  // state variables populated accoridng to whether form is add or update
+  // state variables populated according to whether form is add or update
 
   const [isPrivate, setIsPrivate] = useState(
     props.isUpdate ? props.stratDetails.is_private : false
@@ -121,8 +129,6 @@ export const StrategyFormContent = (props) => {
 
     let response = {};
     if (props.isUpdate) {
-      console.log("Updating strat", strat);
-
       response = await axiosBackendPost(
         `/dogamis/${props.dogamiId}/strats/${stratId}`,
         strat,
@@ -247,8 +253,8 @@ const TrackIdInput = (props) => {
           onChange={(e) => props.onChange(e.target.value)}
         />
       ) : (
+        <p>add track</p>
         // Add track dropdown alternative for dogami page!!!
-        <></>
         // <Dropdown
         //   labelText="Track: "
         //   options={stratFormData.tracks}

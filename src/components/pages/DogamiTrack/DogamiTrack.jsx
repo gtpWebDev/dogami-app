@@ -1,6 +1,6 @@
 import useDogamiTrackData from "../../../hooks/useDogamiTrackData";
 
-import { useState, createContext } from "react";
+import { useState } from "react";
 
 import DogamiDisplay from "../../composites/DogamiDisplay";
 
@@ -13,12 +13,6 @@ import Grid from "@mui/material/Grid";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-import { BoxContentCentred } from "../../styledComponents/box";
-
-import { StrategyForm } from "./StrategyForm";
-
-import AddModal from "../../composites/AddModal";
 
 import { Navigate } from "react-router-dom";
 

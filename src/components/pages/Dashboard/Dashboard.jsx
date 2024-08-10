@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import useGetBackendData from "../../../hooks/useGetBackendData";
 
@@ -6,17 +6,16 @@ import AuthService from "../../../lib/AuthService";
 import { Link } from "react-router-dom";
 
 import DogamiDisplayArea from "./DogamiDisplayArea";
-import AddModal from "../../composites/AddModal";
-import { DogamiAddForm } from "./AddDogamiForm";
 
-import Box from "@mui/material/Box";
+import DogamiFormModal from "../../composites/DogamiFormModal";
+
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
-import { SectionHeader } from "../../primitives/typography";
+import { SectionHeader } from "../../styledComponents/typography";
+import { StyledButton } from "../../styledComponents/buttons";
 
 function Dashboard() {
   // trigger for the custom hook
@@ -51,19 +50,22 @@ const AuthorisedContent = (props) => {
         <SectionHeader>Dashboard</SectionHeader>
       </Grid>
 
-      <Grid item xs={12}>
-        <AddModal buttonText="Add a Dogami">
-          <Box>
-            {/* Material UI modal requires a pure Material UI child */}
-            <DogamiAddForm updateTrigger_cbfn={props.updateTrigger_cbfn} />
-          </Box>
-        </AddModal>
+      <Grid item xs={12} pb={2}>
+        <DogamiFormModal
+          openButtonText="Add a Dogami"
+          updateTrigger_cbfn={props.updateTrigger_cbfn}
+        />
       </Grid>
 
       <Grid item xs={12}>
         <Paper elevation={5}>
           <Stack pb={3}>
-            <Typography component="h4" variant="h4" sx={{ padding: "20px 0" }}>
+            <Typography
+              component="h4"
+              variant="h4"
+              color="primary.contrastText"
+              sx={{ padding: "20px 0" }}
+            >
               You own {props.backendData.owned_dogs.length} dogs
             </Typography>
             <DogamiDisplayArea
@@ -75,9 +77,9 @@ const AuthorisedContent = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <Button onClick={logout} variant="contained">
+        <StyledButton onClick={logout} variant="contained">
           Logout
-        </Button>
+        </StyledButton>
       </Grid>
     </Grid>
   );

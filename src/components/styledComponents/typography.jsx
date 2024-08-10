@@ -2,15 +2,11 @@ import { styled } from "@mui/system";
 
 import Typography from "@mui/material/Typography";
 
-/**
- * Material UI styled component approach
- */
-
 const StyledHeader = styled(Typography)(({ theme }) => ({
   fontWeight: "900",
   margin: "10px",
   padding: "15px 0",
-  color: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
 }));
 
 export const SectionHeader = ({ children }) => {
@@ -35,4 +31,11 @@ export const StyledTitleHeader = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     fontSize: "80px",
   },
+}));
+
+export const TimeText = styled(Typography)(({ theme }) => ({
+  // color: theme.palette.primary.contrastText,
+  color: "#80ff80",
+  fontWeight: "bold",
+  textShadow: "3px 3px black",
 }));

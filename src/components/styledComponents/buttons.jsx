@@ -9,6 +9,14 @@ export const FormButton = ({ children, type = "submit", label, onClick }) => {
   );
 };
 
+export const ContainedSecondaryButton = ({ label, onClick }) => {
+  return (
+    <StyledButton variant="contained" color="secondary" onClick={onClick}>
+      {label}
+    </StyledButton>
+  );
+};
+
 export const StyledButton = styled(Button)(() => ({
   color: "secondary",
   disableRipple: true,
