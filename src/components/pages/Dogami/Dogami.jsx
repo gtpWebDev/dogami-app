@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 
 import { SectionHeader, TimeText } from "../../styledComponents/typography";
 import CustomPaper from "../../styledComponents/paper";
+import { TransparentPaper } from "../../styledComponents/paper";
 
 import CompositeLink from "../../primitives/links";
 
@@ -94,7 +95,7 @@ const Dogami = () => {
       <Grid item xs={12}>
         {/* Container for combination of filters and display*/}
 
-        <Paper elevation={5}>
+        <TransparentPaper elevation={5}>
           <Grid container align="center">
             {/* Title */}
             <Grid item xs={12}>
@@ -120,7 +121,7 @@ const Dogami = () => {
               </Grid>
             </Grid>
           </Grid>
-        </Paper>
+        </TransparentPaper>
       </Grid>
     </Grid>
   );
@@ -207,7 +208,7 @@ const Track = ({ trackDetails }) => {
         Track {trackDetails.name}
       </Typography>
 
-      <TrackCanvas drawArray={trackDetails.draw_array} fullWidth={250} />
+      <TrackCanvas drawArray={trackDetails.draw_array} fullWidth={220} />
     </Box>
   );
 };

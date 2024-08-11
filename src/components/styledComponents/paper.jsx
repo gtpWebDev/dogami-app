@@ -17,4 +17,13 @@ const CustomPaper = styled(Box)(({ theme, elevation }) => ({
       : "0px 5px 5px -3px rgba(255, 255, 255, 0.2), 0px 8px 10px 1px rgba(255, 255, 255, 0.14), 0px 3px 14px 2px rgba(255, 255, 255, 0.12)",
 }));
 
+/**
+ * Transparent override, no offset thin white shadow
+ */
+export const TransparentPaper = styled(Box)(({ theme, elevation }) => ({
+  backgroundColor: "transparent",
+  // horiz offset, vert offset, blur radius, spread radius, color
+  boxShadow: "0px 0px 4px rgba(255, 255, 255, 0.2)",
+}));
+
 export default CustomPaper;

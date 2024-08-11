@@ -182,7 +182,7 @@ const DogamiSelector = (props) => {
           <Box pb={2}>
             <DogamiIdInput
               dogamiOfficialId={dogamiOfficialId}
-              onChange={handleDogamiOfficialIdChange}
+              handleDogamiOfficialIdChange={handleDogamiOfficialIdChange}
             />
           </Box>
 
@@ -209,7 +209,7 @@ const DogamiIdInput = (props) => {
       type="number"
       label="Dogami id"
       value={props.dogamiOfficialId}
-      onChange={(e) => setDogamiOfficialId(e.target.value)}
+      onChange={(e) => props.handleDogamiOfficialIdChange(e)}
     />
   );
 };

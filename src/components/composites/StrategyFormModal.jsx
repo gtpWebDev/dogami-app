@@ -269,7 +269,9 @@ const DropdownInput = ({ labelText, options, onChange, value }) => {
             <MenuItem
               key={option._id}
               value={option._id}
-              sx={{ color: "primary.contrastText" }}
+              sx={{
+                color: "primary.contrastText",
+              }}
             >
               {option.name}
             </MenuItem>

@@ -8,6 +8,8 @@ import TrackCanvas from "../../composites/TrackCanvas";
 
 import StrategyFormModal from "../../composites/StrategyFormModal";
 
+import { TransparentPaper } from "../../styledComponents/paper";
+
 const TrackSection = (props) => {
   const boxStyle = {
     // backgroundColor: "primary.main",

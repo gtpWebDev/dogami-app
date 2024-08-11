@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
 import { StyledButton } from "../../styledComponents/buttons";
+import { TransparentPaper } from "../../styledComponents/paper";
 
 function Dashboard() {
   // trigger for the custom hook
@@ -58,7 +59,7 @@ const AuthorisedContent = (props) => {
       </Grid>
 
       <Grid item xs={12}>
-        <Paper elevation={5}>
+        <TransparentPaper elevation={5}>
           <Stack pb={3}>
             <Typography
               component="h4"
@@ -73,7 +74,7 @@ const AuthorisedContent = (props) => {
               updateTrigger_cbfn={props.updateTrigger_cbfn}
             />
           </Stack>
-        </Paper>
+        </TransparentPaper>
       </Grid>
 
       <Grid item xs={12}>

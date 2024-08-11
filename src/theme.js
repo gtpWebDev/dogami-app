@@ -28,7 +28,7 @@ let theme = createTheme({
       main: red.A400,
     },
     customBackground: {
-      main: "#9791B1",
+      main: "#330033",
       // contrastText: "#000",
     },
   },
@@ -37,6 +37,7 @@ let theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          // backgroundColor: "transparent",
           backgroundColor: primaryMain,
         },
       },
