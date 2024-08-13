@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-import CompositeLink from "../primitives/links";
+import { CompositeLinkNoUnderline } from "../styledComponents/links";
 
 import CustomPaper from "../styledComponents/paper";
 
@@ -24,7 +24,7 @@ const DogamiDisplay = ({ children, dogami }) => {
     <CustomPaper elevation={6} sx={{ padding: "15px 0" }}>
       <Grid container direction="column" spacing={1}>
         <Grid item>
-          <CompositeLink linkLoc={`/dogami/${dogami._id}`}>
+          <CompositeLinkNoUnderline linkLoc={`/dogami/${dogami._id}`}>
             <Grid item>
               <Box paddingX={2} sx={{ display: "flex" }}>
                 <Typography
@@ -48,7 +48,7 @@ const DogamiDisplay = ({ children, dogami }) => {
             <Grid item sx={{ padding: "0 10px" }}>
               <DogImage url={dogami.img_url} />
             </Grid>
-          </CompositeLink>
+          </CompositeLinkNoUnderline>
         </Grid>
 
         <Grid item>{children}</Grid>

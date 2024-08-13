@@ -2,6 +2,10 @@ import React from "react";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+
+import { ConsumableTooltip } from "../styledComponents/tooltip";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,13 +16,15 @@ import { v4 as uuidv4 } from "uuid";
  * Also receives track strat _id to create a unique reference as required in the SVG path
  */
 
-export const GameItem = ({ item, type }) => {
-  const power1ColourArray = () => {
-    let array = [];
-    item.skills.forEach((skill) => {
-      array.push(skill.colour);
-    });
-    return array;
+const GameItem = ({ item, type }) => {
+  const skillsText = () => {
+    const output =
+      item.name === "Dragon"
+        ? "All Skills!"
+        : item.skills.length === 1
+        ? item.skills[0].name
+        : item.skills[0].name + " / " + item.skills[1].name;
+    return output;
   };
 
   return (
@@ -29,21 +35,39 @@ export const GameItem = ({ item, type }) => {
       alignItems="center"
     >
       <Grid item>
-        <GameItemText item={item} />
-      </Grid>
-      <Grid item>
-        <GameItemsSVG
-          item={type}
-          colorArray={power1ColourArray()}
-          id={uuidv4()}
-          width={50}
-          height={50}
-        />
+        <ConsumableTooltip
+          title={skillsText()}
+          placement="top"
+          arrow
+          slotProps={{
+            popper: {
+              modifiers: [
+                {
+                  name: "offset",
+                  options: {
+                    offset: [0, -14],
+                  },
+                },
+              ],
+            },
+          }}
+        >
+          <Box>
+            <GameItemSVG
+              item={item}
+              type={type}
+              uniqueId={uuidv4()}
+              width={60}
+              height={60}
+            />
+          </Box>
+        </ConsumableTooltip>
       </Grid>
     </Grid>
   );
 };
 
+// Using tooltips instead currently
 const GameItemText = ({ item }) => {
   const skillsText = () => {
     const output =
@@ -52,7 +76,7 @@ const GameItemText = ({ item }) => {
         : item.skills.length === 1
         ? item.skills[0].name.substring(0, 3)
         : item.skills[0].name.substring(0, 3) +
-          "/" +
+          " / " +
           item.skills[1].name.substring(0, 3);
     return output;
   };
@@ -64,7 +88,15 @@ const GameItemText = ({ item }) => {
   );
 };
 
-export const GameItemsSVG = ({ item, colorArray, id, width, height }) => {
+export const GameItemSVG = ({ item, type, uniqueId, width, height }) => {
+  const colorArray = () => {
+    let array = [];
+    item.skills.forEach((skill) => {
+      array.push(skill.colour);
+    });
+    return array;
+  };
+
   /**
    * Need to create a color array but also a % offset
    * e.g.
@@ -73,15 +105,15 @@ export const GameItemsSVG = ({ item, colorArray, id, width, height }) => {
    *  {color: "#00ff00", offset: "100%"}
    */
 
-  const svgColourArray = createSVGColourArray(colorArray);
+  const svgColourArray = createSVGColourArray(colorArray());
 
-  const pathArray = getSVGPath(item);
+  const pathArray = getSVGPath(type);
 
   return (
-    <div>
-      <svg width={width} height={height} viewBox="-5.0 -25.0 110.0 135.0">
+    <Box>
+      <svg width={width} height={height} viewBox="-5 -25.0 110.0 135.0">
         <defs>
-          <linearGradient id={id} x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id={uniqueId} x1="0%" y1="0%" x2="100%" y2="100%">
             {svgColourArray.map((item, index) => (
               <stop
                 key={index}
@@ -99,13 +131,13 @@ export const GameItemsSVG = ({ item, colorArray, id, width, height }) => {
           <path
             key={index}
             d={path}
-            fill={`url(#${id})`}
+            fill={`url(#${uniqueId})`}
             stroke="black"
             strokeWidth="2"
           />
         ))}
       </svg>
-    </div>
+    </Box>
   );
 };
 
@@ -188,4 +220,4 @@ const createSVGColourArray = (colorArray) => {
   return svgColourArray;
 };
 
-export default GameItemsSVG;
+export default GameItem;

@@ -17,6 +17,15 @@ export const SectionHeader = ({ children }) => {
   );
 };
 
+// Inline remove padding, higher specificity
+export const SubSectionHeader = ({ children }) => {
+  return (
+    <StyledHeader component="h5" variant="h5" sx={{ padding: "0" }}>
+      {children}
+    </StyledHeader>
+  );
+};
+
 export const StyledTitleHeader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontWeight: "bold",
@@ -33,7 +42,7 @@ export const StyledTitleHeader = styled(Typography)(({ theme }) => ({
   },
 }));
 
-export const TimeText = styled(Typography)(({ theme }) => ({
+export const BestTimeText = styled(Typography)(({ theme }) => ({
   // color: theme.palette.primary.contrastText,
   color: "#80ff80",
   fontWeight: "bold",

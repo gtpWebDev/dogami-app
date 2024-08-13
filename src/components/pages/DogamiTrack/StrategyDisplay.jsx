@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { useState } from "react";
 
 import {
@@ -9,38 +7,60 @@ import {
 
 import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpoints.js";
 
-import GameItemsSVG from "../../composites/GameItemsSVG";
-
-import { StyledButton } from "../../styledComponents/buttons.jsx";
+import StrategyFormModal from "../../composites/StrategyFormModal.jsx";
+import GameItem from "../../composites/GameItem.jsx";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import { StyledButton } from "../../styledComponents/buttons.jsx";
 import { GridRowItemsCentred } from "../../styledComponents/grid";
 import { BoxContentCentred } from "../../styledComponents/box";
-
 import CustomPaper from "../../styledComponents/paper";
-
-import StrategyFormModal from "../../composites/StrategyFormModal.jsx";
+import { BestTimeText } from "../../styledComponents/typography";
 
 const StrategyDisplay = (props) => {
-  return props.strats.map((element) => (
-    <div key={element._id}>
-      <StrategyItem
-        dogamiId={props.dogamiId}
-        updateTrigger_cbfn={props.updateTrigger_cbfn}
-        strat={element}
-        track={props.track}
-      />
-    </div>
-  ));
+  // note this mutates the original array
+  const sortedStrats = props.strats.sort(
+    (a, b) => a.strat_best_time - b.strat_best_time
+  );
+
+  return (
+    <>
+      {sortedStrats.map((element, index) => (
+        <>
+          {index === 0 ? (
+            <Box key={element._id} pb={5}>
+              <StrategyItem
+                dogamiId={props.dogamiId}
+                updateTrigger_cbfn={props.updateTrigger_cbfn}
+                strat={element}
+                track={props.track}
+                topStrategy={true}
+              />
+            </Box>
+          ) : (
+            <Box key={element._id} pb={1}>
+              <StrategyItem
+                dogamiId={props.dogamiId}
+                updateTrigger_cbfn={props.updateTrigger_cbfn}
+                strat={element}
+                track={props.track}
+                topStrategy={false}
+              />
+            </Box>
+          )}
+        </>
+      ))}
+    </>
+  );
 };
 
 const StrategyItem = (props) => {
   return (
     <>
-      <Box sx={{ flexGrow: 1, padding: 2 }}>
+      <Box sx={{ flexGrow: 1, padding: 0 }}>
         <CustomPaper sx={{ padding: 0.2 }} elevation={6}>
           <Grid container spacing={0.2}>
             {/* STONES AND CONSUMABLES */}
@@ -48,9 +68,13 @@ const StrategyItem = (props) => {
               <ItemsSection strat={props.strat} />
             </Grid>
 
-            {/* BEST TIME */}
+            {/* TIME */}
             <Grid item xs={12} md={3}>
-              <BestTimeSection bestTime={props.strat.strat_best_time} />
+              {props.topStrategy ? (
+                <BestTimeSection bestTime={props.strat.strat_best_time} />
+              ) : (
+                <NormalTimeSection bestTime={props.strat.strat_best_time} />
+              )}
             </Grid>
 
             {/* UPDATE / DELETE BUTTONS */}
@@ -72,7 +96,10 @@ const StrategyItem = (props) => {
 const ItemsSection = (props) => {
   return (
     <BoxContentCentred sx={{ height: "90px", py: 4, px: 1 }}>
-      <GridRowItemsCentred container spacing={{ xs: 1, sm: 2, lg: 5, xl: 7 }}>
+      <GridRowItemsCentred
+        container
+        spacing={{ xs: 1, sm: 2, md: 2, lg: 5, xl: 7 }}
+      >
         <Grid item>
           <GameItem item={props.strat.power_1} type="powerstone" />
         </Grid>
@@ -147,62 +174,22 @@ const BestTimeSection = (props) => {
     <BoxContentCentred
       sx={{ height: { xs: "50px", md: "90px" }, py: 4, px: 1 }}
     >
-      <Typography variant="h5" color="primary.contrastText">
-        {props.bestTime.toFixed(3)}
-      </Typography>
+      <BestTimeText variant="h5" color="primary.contrastText">
+        {props.bestTime.toFixed(3)}s
+      </BestTimeText>
     </BoxContentCentred>
   );
 };
 
-const GameItem = ({ item, type }) => {
-  const power1ColourArray = () => {
-    let array = [];
-    item.skills.forEach((skill) => {
-      array.push(skill.colour);
-    });
-    return array;
-  };
-
+const NormalTimeSection = (props) => {
   return (
-    <Grid
-      container
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
+    <BoxContentCentred
+      sx={{ height: { xs: "50px", md: "90px" }, py: 2, px: 1 }}
     >
-      <Grid item>
-        <GameItemText item={item} />
-      </Grid>
-      <Grid item>
-        <GameItemsSVG
-          item={type}
-          colorArray={power1ColourArray()}
-          id={uuidv4()}
-          width={50}
-          height={50}
-        />
-      </Grid>
-    </Grid>
-  );
-};
-
-const GameItemText = ({ item }) => {
-  const skillsText = () => {
-    const output =
-      item.name === "Dragon"
-        ? "All"
-        : item.skills.length === 1
-        ? item.skills[0].name.substring(0, 3)
-        : item.skills[0].name.substring(0, 3) +
-          "/" +
-          item.skills[1].name.substring(0, 3);
-    return output;
-  };
-
-  return (
-    <Typography variant="body2" color="primary.contrastText">
-      {skillsText()}
-    </Typography>
+      <Typography variant="h6" color="error.main">
+        {props.bestTime.toFixed(3)}s
+      </Typography>
+    </BoxContentCentred>
   );
 };
 

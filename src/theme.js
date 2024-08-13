@@ -17,6 +17,7 @@ let theme = createTheme({
     primary: {
       main: primaryMain,
       contrastText: "#ffffff",
+      unfocused: "#999999",
       // light: // can set up light and dark mode
       // dark:
     },
@@ -28,8 +29,8 @@ let theme = createTheme({
       main: red.A400,
     },
     customBackground: {
+      // think no longer used
       main: "#330033",
-      // contrastText: "#000",
     },
   },
   // Stack defaults - center

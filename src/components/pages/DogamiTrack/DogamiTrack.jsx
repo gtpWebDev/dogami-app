@@ -88,14 +88,6 @@ const DogamiTrack = () => {
           </Grid>
         </Box>
       </Grid>
-      <Grid item xs={12}>
-        <p>
-          <Link to={`/dogami/${dogamiId}`}>Return to dogami</Link>
-        </p>
-        <p>
-          <Link to="/dashboard">Return to dashboard</Link>
-        </p>
-      </Grid>
     </Grid>
   );
 };

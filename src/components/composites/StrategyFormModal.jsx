@@ -13,8 +13,11 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
-import CompositeLink from "../primitives/links";
+import { v4 as uuidv4 } from "uuid";
 
+import { GameItemSVG } from "./GameItem";
+
+import { CompositeLink } from "../styledComponents/links";
 import { GridItemsCentred } from "../styledComponents/grid";
 
 import useStratFormData from "../../hooks/useStratFormData";
@@ -192,22 +195,25 @@ export const StrategyFormContent = (props) => {
               onChange={handleIsPrivateChange}
             />
 
-            <DropdownInput
+            <DropdownInputWithImg
               labelText="First power: "
+              type="powerstone"
               options={stratFormData.powers}
               onChange={handlePowerOneChange}
               value={powerOne}
             />
 
-            <DropdownInput
+            <DropdownInputWithImg
               labelText="Second power: "
+              type="powerstone"
               options={stratFormData.powers}
               onChange={handlePowerTwoChange}
               value={powerTwo}
             />
 
-            <DropdownInput
+            <DropdownInputWithImg
               labelText="Consumable: "
+              type="consumable"
               options={stratFormData.consumables}
               onChange={handleConsumableChange}
               value={consumable}
@@ -273,6 +279,43 @@ const DropdownInput = ({ labelText, options, onChange, value }) => {
                 color: "primary.contrastText",
               }}
             >
+              {option.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+  );
+};
+
+const DropdownInputWithImg = ({
+  type,
+  labelText,
+  options,
+  onChange,
+  value,
+}) => {
+  return (
+    <Box pb={2}>
+      {/* No formal link between label and input - wuld need to generate unique id */}
+      <FormControl fullWidth>
+        <InputLabel>{labelText}</InputLabel>
+        <Select label={labelText} value={value} onChange={onChange}>
+          {options.map((option) => (
+            <MenuItem
+              key={option._id}
+              value={option._id}
+              sx={{
+                color: "primary.contrastText",
+              }}
+            >
+              <GameItemSVG
+                type={type}
+                item={option}
+                width={50}
+                height={50}
+                uniqueId={uuidv4()}
+              />
               {option.name}
             </MenuItem>
           ))}

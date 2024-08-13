@@ -57,17 +57,18 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         sx={{
           display: "flex",
           justifyContent: "center",
-          // alignItems: "center",
           minHeight: "100vh",
           color: "#fff",
           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
           position: "relative",
         }}
       >
-        {/* CssBaseline adds styles for more consistency across browsers, consistent box sizing, base typography styles and removes default margins. */}
-        <CssBaseline />
-        {globalStyles}
-        <RouterProvider router={router} />
+        <Box sx={{ position: "relative", zIndex: 2, width: "100%" }}>
+          {/* CssBaseline adds styles for more consistency across browsers, consistent box sizing, base typography styles and removes default margins. */}
+          <CssBaseline />
+          {globalStyles}
+          <RouterProvider router={router} />
+        </Box>
       </Box>
     </ThemeProvider>
   </React.StrictMode>

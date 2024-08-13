@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Temporary log of LOGIN_URI", LOGIN_URI);
+    // console.log("Temporary log of LOGIN_URI", LOGIN_URI);
     const body = { username, password };
     const response = await axiosBackendPost(
       LOGIN_URI,
