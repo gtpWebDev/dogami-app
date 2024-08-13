@@ -29,9 +29,9 @@ const StrategyDisplay = (props) => {
   return (
     <>
       {sortedStrats.map((element, index) => (
-        <>
+        <div key={element._id}>
           {index === 0 ? (
-            <Box key={element._id} pb={5}>
+            <Box pb={5}>
               <StrategyItem
                 dogamiId={props.dogamiId}
                 updateTrigger_cbfn={props.updateTrigger_cbfn}
@@ -41,7 +41,7 @@ const StrategyDisplay = (props) => {
               />
             </Box>
           ) : (
-            <Box key={element._id} pb={1}>
+            <Box pb={1}>
               <StrategyItem
                 dogamiId={props.dogamiId}
                 updateTrigger_cbfn={props.updateTrigger_cbfn}
@@ -51,7 +51,7 @@ const StrategyDisplay = (props) => {
               />
             </Box>
           )}
-        </>
+        </div>
       ))}
     </>
   );

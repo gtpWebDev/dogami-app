@@ -9,6 +9,7 @@ import { red } from "@mui/material/colors";
 
 // when generating theme can't reference theme!
 const primaryMain = "#1E0356";
+const secondaryMain = "#74175A";
 
 // Create a theme instance.
 let theme = createTheme({
@@ -22,11 +23,15 @@ let theme = createTheme({
       // dark:
     },
     secondary: {
-      main: "#74175A",
+      main: secondaryMain,
     },
     // error, warning, info, success for severity and use in Alerts
     error: {
       main: red.A400,
+    },
+    footer: {
+      accent: secondaryMain,
+      background: "#0E012B",
     },
     customBackground: {
       // think no longer used

@@ -6,6 +6,7 @@ import ScrollToTop from "./scrollToTop";
 
 import TitleBar from "./components/layouts/TitleBar";
 import NavBar from "./components/layouts/NavBar";
+import Footer from "./components/layouts/Footer";
 
 // Material UI imports
 import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
@@ -21,8 +22,6 @@ function App() {
 
           {/* Functional application bar */}
           <NavBar />
-
-          <Sidebar />
 
           <MainArea />
 
@@ -43,22 +42,11 @@ const MainArea = () => {
   return (
     <Container maxWidth="xl">
       <main>
-        <Outlet />
+        <Box pb={6}>
+          <Outlet />
+        </Box>
       </main>
     </Container>
-  );
-};
-
-const Sidebar = () => {
-  <aside>hello{/* Empty currently */}</aside>;
-};
-
-const Footer = () => {
-  return (
-    <footer>
-      <hr />
-      <h2>Footer</h2>
-    </footer>
   );
 };
 
