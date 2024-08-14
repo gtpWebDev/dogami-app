@@ -89,6 +89,7 @@ export const DogamiFormContent = (props) => {
     if (response.success) {
       // trigger parent refresh to include the new dog
       props.updateTrigger_cbfn(new Date());
+      props.handleClose();
     } else {
       setAddDogamiMsg(response.error.message);
     }

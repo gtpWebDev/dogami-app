@@ -178,6 +178,7 @@ export const axiosBackendDelete = async (uri, config) => {
     const errorResponse = {
       success: false,
       data: null,
+      // error: error,
       error: {
         status: error.response.status,
         message: error.response.data.msg,

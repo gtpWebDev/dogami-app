@@ -18,11 +18,7 @@ import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
 function App() {
   // Manage username, which controls navbar profile menu - is not used for authorisation
   const [currentUser, setCurrentUser] = useState(null);
-
-  const handleChangeCurrentUser = (user) => {
-    console.log(`Current user changed to ${user}`);
-    setCurrentUser(user);
-  };
+  const handleChangeCurrentUser = (user) => setCurrentUser(user);
 
   useEffect(() => {
     // collect username from local storage, if it exists
@@ -67,7 +63,7 @@ const MainArea = ({ currentUser, handleChangeCurrentUser }) => {
   // Container centres content for all routes, widest possible
   return (
     <Container maxWidth="xl">
-      {/* If not logged in, navigate to home page */}
+      {/* Navigation logic here but surprised that it doesn't create issues */}
       {!currentUser && <Navigate to={`/`} replace={false} />}
       {currentUser && <Navigate to={`/Dashboard`} replace={false} />}
       <main>

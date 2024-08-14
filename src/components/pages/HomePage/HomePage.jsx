@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { CompositeLink } from "../../styledComponents/links";
+import {
+  CompositeLink,
+  CompositeLinkUnderline,
+} from "../../styledComponents/links";
 import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
@@ -26,7 +29,7 @@ function HomePage() {
           <Typography variant="h6" color="primary.contrastText">
             Add as many dogs as you like
             <br />
-            ...with as many strategies as like
+            ...with as many strategies as you like
             <br />
             ...for as many tracks as you like!
             <br />
@@ -34,14 +37,14 @@ function HomePage() {
         </Box>
 
         <Box mb={5}>
-          <CompositeLink linkLoc="register">
-            <Typography variant="h5">{"<Register>"}</Typography>
-          </CompositeLink>
+          <CompositeLinkUnderline linkLoc="register">
+            <Typography variant="h5">Register</Typography>
+          </CompositeLinkUnderline>
         </Box>
         <Box>
-          <CompositeLink linkLoc="login">
-            <Typography variant="h5">{"<Login>"}</Typography>
-          </CompositeLink>
+          <CompositeLinkUnderline linkLoc="login">
+            <Typography variant="h5">Login</Typography>
+          </CompositeLinkUnderline>
         </Box>
       </Stack>
     </Container>

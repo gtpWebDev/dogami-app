@@ -69,7 +69,7 @@ function NavBar({ currentUser, handleChangeCurrentUser }) {
               // Logout button
               <ProfileButton
                 sx={{ borderRadius: "30px", p: 0 }}
-                label={`LOGOUT ${currentUser.substring(0, 10)}`}
+                label={`LOGOUT ${currentUser.substring(0, 15)}`}
                 onClick={logoutUser}
               />
             ) : (

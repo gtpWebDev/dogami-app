@@ -50,21 +50,6 @@ const Dogami = () => {
 
   return (
     <Grid container spacing={2} align="center">
-      <Grid item xs={12} mt={2}>
-        <Typography
-          variant="body2"
-          color={{
-            xs: "green",
-            sm: "red",
-            md: "blue",
-            lg: "orange",
-            xl: "pink",
-          }}
-        >
-          xs green, sm red, md blue, lg orange, xl pink
-        </Typography>
-      </Grid>
-
       <Grid item xs={12}>
         <SectionHeader>{data.dogami.name}</SectionHeader>
       </Grid>

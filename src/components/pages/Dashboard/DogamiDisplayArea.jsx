@@ -1,16 +1,7 @@
-import { useState } from "react";
+import Grid from "@mui/material/Grid";
 
 import DogamiDisplay from "../../composites/DogamiDisplay";
-
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-
-import {
-  BACKEND_URI,
-  HEADER_JSON_CONFIG,
-} from "../../../constants/backendRequests";
-
-import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpoints";
+import DeleteDogamiModal from "../../composites/DeleteDogamiModal";
 
 const DogamiDisplayArea = (props) => {
   return (
@@ -35,28 +26,15 @@ const DogamiDisplayArea = (props) => {
 };
 
 const DeleteDogButton = (props) => {
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  // should add modulars to check "are you sure"
-  const handleDelete = async () => {
-    const deleteUri = `${BACKEND_URI}/dogamis/${props.dogamiId}`;
-    const response = await axiosBackendDelete(deleteUri, HEADER_JSON_CONFIG);
-
-    if (response.success) {
-      // need to refresh content of page to include the new dog
-      props.updateTrigger_cbfn(new Date());
-    } else {
-      setErrorMsg(response.error.message);
-    }
-  };
-
+  {
+    /* Delete button doesn't delete, opens modal to confirm */
+  }
   return (
-    <>
-      <Button variant="contained" color="secondary" onClick={handleDelete}>
-        Delete
-      </Button>
-      {errorMsg ? <p>{errorMsg}</p> : <></>}
-    </>
+    <DeleteDogamiModal
+      openButtonText="Delete"
+      dogamiId={props.dogamiId}
+      updateTrigger_cbfn={props.updateTrigger_cbfn}
+    />
   );
 };
 

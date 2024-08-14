@@ -37,7 +37,7 @@ const DogamiTrack = () => {
 
   return (
     <Grid container spacing={4}>
-      <Grid item xs={12} mt={2}>
+      {/* <Grid item xs={12} mt={2}>
         <Typography
           variant="body2"
           color={{
@@ -50,7 +50,7 @@ const DogamiTrack = () => {
         >
           xs green, sm red, md blue, lg orange, xl pink
         </Typography>
-      </Grid>
+      </Grid> */}
 
       {/* Track section full width always */}
       <Grid item xs={12} mt={2}>

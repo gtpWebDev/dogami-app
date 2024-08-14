@@ -1,7 +1,7 @@
 import { StyledCentredBox } from "../primitives/boxes";
 import { StyledTitleHeader } from "../styledComponents/typography";
 
-import backgroundImage from "../../assets/dogami-header.jpg";
+import backgroundImage from "../../assets/banner3.jpg";
 
 /**
  * This TitleBar component sits above the actual App Bar
@@ -22,7 +22,7 @@ export const TitleBar = () => {
         backgroundColor: "primary.main",
       }}
     >
-      <StyledTitleHeader>Dogami App</StyledTitleHeader>
+      <StyledTitleHeader>Dogami Strats</StyledTitleHeader>
     </StyledCentredBox>
   );
 };
