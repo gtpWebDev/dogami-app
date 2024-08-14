@@ -22,3 +22,21 @@ export const StyledButton = styled(Button)(() => ({
   disableRipple: true,
   borderRadius: "10px",
 }));
+
+export const ProfileButton = ({ label, onClick }) => {
+  return (
+    <StyledProfileButton
+      variant="contained"
+      color="secondary"
+      onClick={onClick}
+    >
+      {label}
+    </StyledProfileButton>
+  );
+};
+
+export const StyledProfileButton = styled(Button)(() => ({
+  color: "secondary",
+  disableRipple: true,
+  borderRadius: "20px",
+}));

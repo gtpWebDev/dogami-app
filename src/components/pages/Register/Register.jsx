@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
+
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
@@ -21,22 +23,21 @@ import {
 import { Navigate } from "react-router-dom";
 
 const Register = () => {
-  // manage existingUser - used to prompt redirect to dashboard
-  const [existingUser, setExistingUser] = useState(null);
-  const updateExistingUser_cbfn = (userId) => setExistingUser(userId);
+  // Outlet context from react-router-app
+  const [currentUser, handleChangeCurrentUser] = useOutletContext();
 
   return (
     <Container maxWidth="xs">
       {/* User available after successful login, redirect to dashboard */}
-      {existingUser && <Navigate to={`/dashboard`} replace={false} />}
+      {currentUser && <Navigate to={`/dashboard`} replace={false} />}
 
       <Grid container spacing={2} align="center">
         <Grid item xs={12} mt={2}>
-          <SectionHeader>Registration Page</SectionHeader>
+          <SectionHeader>Registration</SectionHeader>
         </Grid>
 
         <Grid item xs={12}>
-          <RegisterForm updateExistingUser_cbfn={updateExistingUser_cbfn} />
+          <RegisterForm handleChangeCurrentUser={handleChangeCurrentUser} />
         </Grid>
 
         <Grid item xs={12} mb={5}>
@@ -47,7 +48,7 @@ const Register = () => {
   );
 };
 
-const RegisterForm = (props) => {
+const RegisterForm = ({ handleChangeCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [registerMsg, setRegisterMsg] = useState("");
@@ -63,9 +64,9 @@ const RegisterForm = (props) => {
     if (response.success) {
       const credentials = response.data;
       // store credentials in local storage and update current user
-      const authService = new AuthService();
+      const authService = new AuthService(username);
       authService.setLocalStorage(credentials);
-      props.updateExistingUser_cbfn(credentials.user._id);
+      handleChangeCurrentUser(credentials.user.username);
     } else {
       setRegisterMsg(response.error.message);
     }

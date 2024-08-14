@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
+
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
 
@@ -21,14 +23,13 @@ import {
 import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  // manage existingUser - used to prompt redirect to dashboard
-  const [existingUser, setExistingUser] = useState(null);
-  const updateExistingUser_cbfn = (userId) => setExistingUser(userId);
+  // Outlet context from react-router-app
+  const [currentUser, handleChangeCurrentUser] = useOutletContext();
 
   return (
     <Container maxWidth="xs">
       {/* User available after successful login, redirect to dashboard */}
-      {existingUser && <Navigate to={`/dashboard`} replace={false} />}
+      {/* {currentUser && <Navigate to={`/dashboard`} replace={false} />} */}
 
       <Grid container spacing={2} align="center">
         <Grid item xs={12} mt={2}>
@@ -36,7 +37,7 @@ const Login = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <LoginForm updateExistingUser_cbfn={updateExistingUser_cbfn} />
+          <LoginForm handleChangeCurrentUser={handleChangeCurrentUser} />
         </Grid>
 
         <Grid item xs={12} mb={5}>
@@ -47,7 +48,7 @@ const Login = () => {
   );
 };
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleChangeCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState(null);
@@ -63,9 +64,9 @@ const LoginForm = (props) => {
     if (response.success) {
       const credentials = response.data;
       // store credentials in local storage and update current user
-      const authService = new AuthService();
+      const authService = new AuthService(username);
       authService.setLocalStorage(credentials);
-      props.updateExistingUser_cbfn(credentials.user._id);
+      handleChangeCurrentUser(credentials.user.username);
     } else {
       setLoginMsg(response.error.message);
     }

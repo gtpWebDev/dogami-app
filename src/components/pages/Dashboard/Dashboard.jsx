@@ -15,7 +15,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
-import { StyledButton } from "../../styledComponents/buttons";
 import { TransparentPaper } from "../../styledComponents/paper";
 
 function Dashboard() {
@@ -40,11 +39,6 @@ function Dashboard() {
 }
 
 const AuthorisedContent = (props) => {
-  const logout = () => {
-    const authService = new AuthService();
-    authService.logout();
-  };
-
   return (
     <Grid container spacing={2} align="center">
       <Grid item xs={12}>
@@ -75,12 +69,6 @@ const AuthorisedContent = (props) => {
             />
           </Stack>
         </TransparentPaper>
-      </Grid>
-
-      <Grid item xs={12}>
-        <StyledButton onClick={logout} variant="contained">
-          Logout
-        </StyledButton>
       </Grid>
     </Grid>
   );

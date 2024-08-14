@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Container, Grid, Typography, Link } from "@mui/material";
+import { CompositeLink } from "../styledComponents/links";
 
 const Footer = () => {
   return (
@@ -13,15 +14,15 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Box my={2} textAlign="center">
-          <Typography variant="body2">
-            <Link href="#top" color="inherit">
-              Back to top
-            </Link>
-          </Typography>
-        </Box>
-
         <Grid container spacing={5} px={3} pb={5}>
+          <Grid item xs={12} align="center" mt={1}>
+            <Typography variant="body2">
+              <Link href="#top" color="footer.accent">
+                Back to top
+              </Link>
+            </Typography>
+          </Grid>
+
           <Grid item xs={12} md={3}>
             <Typography variant="h6">My Details</Typography>
             <Typography variant="body2">

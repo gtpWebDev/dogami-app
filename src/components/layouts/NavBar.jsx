@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import AuthService from "../../lib/AuthService";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,31 +18,40 @@ import AdbIcon from "@mui/icons-material/Adb";
 
 import NavBarBreadcrumbs from "../composites/Breadcrumbs";
 
-/**
- * Return to this, have copy-pasted from the following link:
- * https://mui.com/material-ui/react-app-bar/#app-bar-with-responsive-menu
- */
+import { ConsumableTooltip } from "../styledComponents/tooltip";
+import { ProfileButton } from "../styledComponents/buttons";
+import { CompositeLinkNoUnderline } from "../styledComponents/links";
 
 const pages = ["Dashboard", "Dogami", "Strategies"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const userMenu = ["Dashboard", "Logout"];
 
-function NavBar() {
-  const [anchorElNav, setAnchorElNav] = useState("");
-  const [anchorElUser, setAnchorElUser] = useState("");
+function NavBar({ currentUser, handleChangeCurrentUser }) {
+  // const [anchorElNav, setAnchorElNav] = useState("");
+  // const [anchorElUser, setAnchorElUser] = useState("");
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
+  // const handleOpenUserMenu = (event) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
+
+  const logoutUser = () => {
+    /**
+     * Remove details from local storage, set currentUser to null
+     * and go to the login page
+     */
+    const authService = new AuthService();
+    authService.logout();
+    handleChangeCurrentUser(null);
   };
 
   return (
@@ -52,35 +63,24 @@ function NavBar() {
             <NavBarBreadcrumbs />
           </Box>
 
-          {/* ALways show, take remaining space */}
+          {/* Always show, take remaining space */}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            {currentUser ? (
+              // Logout button
+              <ProfileButton
+                sx={{ borderRadius: "30px", p: 0 }}
+                label={`LOGOUT ${currentUser.substring(0, 10)}`}
+                onClick={logoutUser}
+              />
+            ) : (
+              // Button within link to login page
+              <CompositeLinkNoUnderline linkLoc="/login">
+                <ProfileButton
+                  sx={{ borderRadius: "30px", p: 0 }}
+                  label="Login"
+                />
+              </CompositeLinkNoUnderline>
+            )}
           </Box>
         </Toolbar>
       </Container>

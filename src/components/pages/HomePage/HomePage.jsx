@@ -10,17 +10,37 @@ import { SectionHeader } from "../../styledComponents/typography";
 
 function HomePage() {
   return (
-    <Container>
+    <Container maxWidth="md">
       <Stack mt={2}>
-        <SectionHeader>Home Page</SectionHeader>
-        <Box m={5}>
+        <SectionHeader>Dogami Strategizer</SectionHeader>
+        <Box pb={4} align="center">
+          <Typography variant="h5" color="primary.contrastText">
+            Do you struggle to remember which combination of power stones and
+            consumables gives you the best possible time in the daily Dogami
+            trials? Then this is the app for you!
+            <br />
+          </Typography>
+        </Box>
+
+        <Box pb={6} align="center">
+          <Typography variant="h6" color="primary.contrastText">
+            Add as many dogs as you like
+            <br />
+            ...with as many strategies as like
+            <br />
+            ...for as many tracks as you like!
+            <br />
+          </Typography>
+        </Box>
+
+        <Box mb={5}>
           <CompositeLink linkLoc="register">
-            <Typography variant="h6">Register here</Typography>
+            <Typography variant="h5">{"<Register>"}</Typography>
           </CompositeLink>
         </Box>
-        <Box mb={15}>
+        <Box>
           <CompositeLink linkLoc="login">
-            <Typography variant="h6">Login here</Typography>
+            <Typography variant="h5">{"<Login>"}</Typography>
           </CompositeLink>
         </Box>
       </Stack>
