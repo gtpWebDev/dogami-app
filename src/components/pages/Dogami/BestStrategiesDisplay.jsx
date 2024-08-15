@@ -38,6 +38,10 @@ const BestStrategiesDisplay = ({ strats, dogamiId }) => {
 
   // Filter construction
   const filteredStrats = strats.filter((strategy) => {
+    console.log(
+      "Checking strategy.trackDetails.obstacle_sequence",
+      strategy.trackDetails.obstacle_sequence
+    );
     return (
       (trackNameFilter === "" ||
         strategy.trackDetails.name
