@@ -22,7 +22,7 @@ export const TitleBar = () => {
         backgroundColor: "primary.main",
       }}
     >
-      <StyledTitleHeader>Dogami Strats</StyledTitleHeader>
+      <StyledTitleHeader>Dogami Companion</StyledTitleHeader>
     </StyledCentredBox>
   );
 };

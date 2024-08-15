@@ -7,6 +7,15 @@ const StyledHeader = styled(Typography)(({ theme }) => ({
   margin: "10px",
   padding: "15px 0",
   color: theme.palette.primary.contrastText,
+  [theme.breakpoints.up("xs")]: {
+    fontSize: "34px",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "41px",
+  },
+  [theme.breakpoints.up("lg")]: {
+    fontSize: "41px",
+  },
 }));
 
 export const SectionHeader = ({ children }) => {
@@ -30,9 +39,9 @@ export const StyledTitleHeader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontWeight: "bold",
   textShadow: "3px 3px black",
-  fontSize: "50px",
+  fontSize: "45px",
   [theme.breakpoints.up("sm")]: {
-    fontSize: "60px",
+    fontSize: "50px",
   },
   [theme.breakpoints.up("md")]: {
     fontSize: "70px",

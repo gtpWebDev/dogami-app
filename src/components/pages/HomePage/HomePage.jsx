@@ -15,7 +15,7 @@ function HomePage() {
   return (
     <Container maxWidth="md">
       <Stack mt={2}>
-        <SectionHeader>Dogami Strategizer</SectionHeader>
+        <SectionHeader>Companion Home Page</SectionHeader>
         <Box pb={4} align="center">
           <Typography variant="h5" color="primary.contrastText">
             Do you struggle to remember which combination of power stones and
