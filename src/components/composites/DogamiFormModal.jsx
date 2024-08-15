@@ -139,20 +139,39 @@ export const DogamiFormContent = (props) => {
 
 const DogamiSelector = (props) => {
   const [dogamiOfficialId, setDogamiOfficialId] = useState("1000");
+  const [addDogamiMsg, setAddDogamiMsg] = useState("");
 
   const selectDogami = async (event) => {
     event.preventDefault();
 
-    // collect dogami data from dogami proxy api
-    const response = await axiosDogamiUri(dogamiOfficialId);
-    const dogamiProxyData = response.data[0];
+    // inserting alternative process - getting dog data from backend
+
+    const response = await axiosBackendGet(
+      `/dogami-official-api/${dogamiOfficialId}`
+    );
+    const dogamiData = response.data;
+    console.log("dogamiData", dogamiData);
     let dogamiObj = null;
     if (response.success) {
       // construct a Dogami class from the collected data
-      dogamiObj = constructDogamiObject(dogamiProxyData);
+      dogamiObj = constructDogamiObject(dogamiData);
     } else {
       setAddDogamiMsg(response.error);
     }
+
+    // Keep this here and commented, working process while API exists
+    // now storing and collecting 16000 dogs in backend to ensure
+    // future proofing - no external dependencies
+    // collect dogami data from dogami proxy api
+    // const response = await axiosDogamiUri(dogamiOfficialId);
+    // const dogamiProxyData = response.data[0];
+    // let dogamiObj = null;
+    // if (response.success) {
+    //   // construct a Dogami class from the collected data
+    //   dogamiObj = constructDogamiObject(dogamiProxyData);
+    // } else {
+    //   setAddDogamiMsg(response.error);
+    // }
 
     // Separately get trusted img data from backend
     const dogamiImgData = await axiosBackendGet(
@@ -164,7 +183,8 @@ const DogamiSelector = (props) => {
       dogamiObj.img_url = imgUrl;
       props.assignDogami_cbfn(dogamiObj);
     } else {
-      setAddDogamiMsg(response.error);
+      setAddDogamiMsg(response.error.message.msg);
+      // console.log("response.error", response.error);
     }
   };
 
