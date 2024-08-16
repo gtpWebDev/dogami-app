@@ -18,9 +18,9 @@ function HomePage() {
         <SectionHeader>Companion Home Page</SectionHeader>
         <Box pb={4} align="center">
           <Typography variant="h5" color="primary.contrastText">
-            Do you struggle to remember which combination of power stones and
-            consumables gives you the best possible time in the daily Dogami
-            trials? Then this is the app for you!
+            Can you remember which combination of power stones and consumables
+            gives you the best possible time in the daily Dogami trials? If not,
+            then this is the app for you!
             <br />
           </Typography>
         </Box>
