@@ -3,6 +3,7 @@ import useDogamiTrackData from "../../../hooks/useDogamiTrackData";
 import { useState } from "react";
 
 import DogamiDisplay from "../../composites/DogamiDisplay";
+import Loading from "../../composites/Loading";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -30,7 +31,7 @@ const DogamiTrack = () => {
     updateTrigger
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   // Management of errors and lack of auth to come
   if (error) return <Navigate to={`/errorPage`} replace={false} />;

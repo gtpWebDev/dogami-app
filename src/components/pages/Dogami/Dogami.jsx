@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import useGetBackendData from "../../../hooks/useGetBackendData";
 
 import StrategyFormModal from "../../composites/StrategyFormModal";
+import Loading from "../../composites/Loading";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -32,7 +33,7 @@ const Dogami = () => {
     updateTrigger
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   if (error) {
     return (

@@ -88,13 +88,13 @@ export const DeleteDogamiFormContent = (props) => {
             </Grid>
           </GridItemsCentred>
         </Grid>
-        <Grid item pt={3}>
-          {deleteDogamiMsg ? (
+        {deleteDogamiMsg ? (
+          <Grid item pt={3}>
             <Alert severity="error">{deleteDogamiMsg}</Alert>
-          ) : (
-            <></>
-          )}
-        </Grid>
+          </Grid>
+        ) : (
+          <></>
+        )}
       </GridItemsCentred>
     </Box>
   );

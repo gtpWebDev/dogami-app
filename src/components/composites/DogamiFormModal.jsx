@@ -3,7 +3,6 @@ import { useState } from "react";
 import DogamiDisplay from "./DogamiDisplay";
 
 import Modal from "@mui/material/Modal";
-import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
@@ -18,7 +17,7 @@ import {
   HEADER_JSON_CONFIG,
 } from "../../constants/backendRequests";
 
-import { axiosDogamiUri } from "../../lib/axiosRequests/axiosDogamiEndpoints";
+// import { axiosDogamiUri } from "../../lib/axiosRequests/axiosDogamiEndpoints";
 import {
   axiosBackendPost,
   axiosBackendGet,
@@ -150,7 +149,6 @@ const DogamiSelector = (props) => {
       `/dogami-official-api/${dogamiOfficialId}`
     );
     const dogamiData = response.data;
-    console.log("dogamiData", dogamiData);
     let dogamiObj = null;
     if (response.success) {
       // construct a Dogami class from the collected data

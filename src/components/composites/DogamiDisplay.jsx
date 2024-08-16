@@ -20,6 +20,8 @@ const DogamiDisplay = ({ children, dogami }) => {
   //   console.log("dogami", dogami);
   // }, []);
 
+  const maxTextLength = 14; // guarantees window width
+
   return (
     <CustomPaper elevation={6} sx={{ padding: "15px 0" }}>
       <Grid container direction="column" spacing={1}>
@@ -41,7 +43,10 @@ const DogamiDisplay = ({ children, dogami }) => {
               </Box>
               <Box paddingX={2} sx={{ display: "flex" }}>
                 <Typography variant="body1" sx={{ color: "#ffffff" }}>
-                  Level {dogami.level} {dogami.breed}
+                  Level {dogami.level}{" "}
+                  {dogami.breed.length > maxTextLength
+                    ? dogami.breed.slice(0, maxTextLength) + "..."
+                    : dogami.breed}
                 </Typography>
               </Box>
             </Grid>

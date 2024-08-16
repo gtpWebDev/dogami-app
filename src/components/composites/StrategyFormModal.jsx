@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { STONE_WIDTH_DROPDOWN } from "../../constants/dogamiInfo";
+
 import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -12,8 +14,6 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-
-import { v4 as uuidv4 } from "uuid";
 
 import { GameItemSVG } from "./GameItem";
 
@@ -264,14 +264,31 @@ const IsPrivateInput = (props) => {
   );
 };
 
+// Used for track input only currently
 const DropdownInput = ({ labelText, options, onChange, value }) => {
+  // sorts by database id. table constructed with required display order in mind
+  const sortedOptions = options.sort(
+    (a, b) => a.display_order - b.display_order
+  );
+
   return (
     <Box pb={2}>
       {/* No formal link between label and input - wuld need to generate unique id */}
       <FormControl fullWidth>
         <InputLabel>{labelText}</InputLabel>
-        <Select label={labelText} value={value} onChange={onChange}>
-          {options.map((option) => (
+        <Select
+          label={labelText}
+          value={value}
+          onChange={onChange}
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: 300, // Control the overall height of the dropdown menu if needed
+              },
+            },
+          }}
+        >
+          {sortedOptions.map((option) => (
             <MenuItem
               key={option._id}
               value={option._id}
@@ -300,7 +317,18 @@ const DropdownInputWithImg = ({
       {/* No formal link between label and input - wuld need to generate unique id */}
       <FormControl fullWidth>
         <InputLabel>{labelText}</InputLabel>
-        <Select label={labelText} value={value} onChange={onChange}>
+        <Select
+          label={labelText}
+          value={value}
+          onChange={onChange}
+          MenuProps={{
+            PaperProps: {
+              style: {
+                maxHeight: 350, // Control the overall height of the dropdown menu if needed
+              },
+            },
+          }}
+        >
           {options.map((option) => (
             <MenuItem
               key={option._id}
@@ -312,9 +340,8 @@ const DropdownInputWithImg = ({
               <GameItemSVG
                 type={type}
                 item={option}
-                width={50}
-                height={50}
-                uniqueId={uuidv4()}
+                width={STONE_WIDTH_DROPDOWN}
+                height={STONE_WIDTH_DROPDOWN}
               />
               {option.name}
             </MenuItem>

@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import { STONE_WIDTH_MAIN } from "../../../constants/dogamiInfo";
 
 import { BestTimeText } from "../../styledComponents/typography";
 import CustomPaper from "../../styledComponents/paper";
@@ -118,8 +118,14 @@ const Filters = () => {
 
 const StrategyDisplay = ({ strats, dogamiId }) => {
   // note this mutates the original array
-  const sortedStrats = strats.sort((a, b) =>
-    a.trackDetails.name.localeCompare(b.trackDetails.name)
+  // const sortedStrats = strats.sort((a, b) =>
+  //   a.trackDetails.name.localeCompare(b.trackDetails.name)
+  // );
+
+  console.log("strats", strats);
+
+  const sortedStrats = strats.sort(
+    (a, b) => a.trackDetails.display_order - b.trackDetails.display_order
   );
 
   return (
@@ -172,13 +178,28 @@ const GameItems = ({ strat }) => {
   return (
     <Grid container>
       <Grid item xs={4}>
-        <GameItem item={strat.power_1} type="powerstone" />
+        <GameItem
+          item={strat.power_1}
+          type="powerstone"
+          width={STONE_WIDTH_MAIN}
+          height={STONE_WIDTH_MAIN}
+        />
       </Grid>
       <Grid item xs={4}>
-        <GameItem item={strat.power_2} type="powerstone" />
+        <GameItem
+          item={strat.power_2}
+          type="powerstone"
+          width={STONE_WIDTH_MAIN}
+          height={STONE_WIDTH_MAIN}
+        />
       </Grid>
       <Grid item xs={4}>
-        <GameItem item={strat.consumable_1} type="consumable" />
+        <GameItem
+          item={strat.consumable_1}
+          type="consumable"
+          width={STONE_WIDTH_MAIN}
+          height={STONE_WIDTH_MAIN}
+        />
       </Grid>
     </Grid>
   );

@@ -5,6 +5,8 @@ import {
   HEADER_JSON_CONFIG,
 } from "../../../constants/backendRequests.js";
 
+import { STONE_WIDTH_MAIN } from "../../../constants/dogamiInfo";
+
 import { axiosBackendDelete } from "../../../lib/axiosRequests/axiosBackendEndpoints.js";
 
 import StrategyFormModal from "../../composites/StrategyFormModal.jsx";
@@ -101,13 +103,28 @@ const ItemsSection = (props) => {
         spacing={{ xs: 1, sm: 2, md: 2, lg: 5, xl: 7 }}
       >
         <Grid item>
-          <GameItem item={props.strat.power_1} type="powerstone" />
+          <GameItem
+            item={props.strat.power_1}
+            type="powerstone"
+            width={STONE_WIDTH_MAIN}
+            height={STONE_WIDTH_MAIN}
+          />
         </Grid>
         <Grid item>
-          <GameItem item={props.strat.power_2} type="powerstone" />
+          <GameItem
+            item={props.strat.power_2}
+            type="powerstone"
+            width={STONE_WIDTH_MAIN}
+            height={STONE_WIDTH_MAIN}
+          />
         </Grid>
         <Grid item>
-          <GameItem item={props.strat.consumable_1} type="consumable" />
+          <GameItem
+            item={props.strat.consumable_1}
+            type="consumable"
+            width={STONE_WIDTH_MAIN}
+            height={STONE_WIDTH_MAIN}
+          />
         </Grid>
       </GridRowItemsCentred>
     </BoxContentCentred>

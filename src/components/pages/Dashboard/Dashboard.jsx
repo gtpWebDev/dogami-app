@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import useGetBackendData from "../../../hooks/useGetBackendData";
 
-import AuthService from "../../../lib/AuthService";
 import { Link } from "react-router-dom";
 
 import DogamiDisplayArea from "./DogamiDisplayArea";
@@ -10,12 +9,12 @@ import DogamiDisplayArea from "./DogamiDisplayArea";
 import DogamiFormModal from "../../composites/DogamiFormModal";
 
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
 import { TransparentPaper } from "../../styledComponents/paper";
+import Loading from "../../composites/Loading";
 
 function Dashboard() {
   // trigger for the custom hook
@@ -27,7 +26,8 @@ function Dashboard() {
     updateTrigger
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+
   if (error) return <UnauthorisedContent />;
 
   return (
