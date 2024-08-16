@@ -20,7 +20,7 @@ const StyledHeader = styled(Typography)(({ theme }) => ({
 
 export const SectionHeader = ({ children }) => {
   return (
-    <StyledHeader component="h3" variant="h3">
+    <StyledHeader component="h3" variant="h3" align="center">
       {children}
     </StyledHeader>
   );
@@ -29,10 +29,19 @@ export const SectionHeader = ({ children }) => {
 // Inline remove padding, higher specificity
 export const SubSectionHeader = ({ children }) => {
   return (
-    <StyledHeader component="h5" variant="h5" sx={{ padding: "0" }}>
+    <StyledHeader
+      component="h5"
+      align="center"
+      variant="h5"
+      sx={{ padding: "0" }}
+    >
       {children}
     </StyledHeader>
   );
+};
+
+export const TitleHeader = ({ children }) => {
+  return <StyledTitleHeader align="center">{children}</StyledTitleHeader>;
 };
 
 export const StyledTitleHeader = styled(Typography)(({ theme }) => ({

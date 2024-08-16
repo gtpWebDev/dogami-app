@@ -5,7 +5,6 @@ import useGetBackendData from "../../../hooks/useGetBackendData";
 import { Link } from "react-router-dom";
 
 import DogamiDisplayArea from "./DogamiDisplayArea";
-
 import DogamiFormModal from "../../composites/DogamiFormModal";
 
 import Grid from "@mui/material/Grid";
@@ -14,6 +13,7 @@ import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
 import { TransparentPaper } from "../../styledComponents/paper";
+
 import Loading from "../../composites/Loading";
 
 function Dashboard() {

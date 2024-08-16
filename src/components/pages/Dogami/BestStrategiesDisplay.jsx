@@ -38,11 +38,6 @@ const BestStrategiesDisplay = ({ strats, dogamiId }) => {
 
   // Filter construction
   const filteredStrats = strats.filter((strategy) => {
-    // console.log("Checking strats", strats);
-    // console.log(
-    //   "Checking strategy.trackDetails.obstacle_sequence",
-    //   strategy.trackDetails.obstacle_sequence
-    // );
     return (
       (trackNameFilter === "" ||
         strategy.trackDetails.name
@@ -118,12 +113,6 @@ const Filters = () => {
 
 const StrategyDisplay = ({ strats, dogamiId }) => {
   // note this mutates the original array
-  // const sortedStrats = strats.sort((a, b) =>
-  //   a.trackDetails.name.localeCompare(b.trackDetails.name)
-  // );
-
-  console.log("strats", strats);
-
   const sortedStrats = strats.sort(
     (a, b) => a.trackDetails.display_order - b.trackDetails.display_order
   );

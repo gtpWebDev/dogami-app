@@ -1,5 +1,5 @@
 import { StyledCentredBox } from "../primitives/boxes";
-import { StyledTitleHeader } from "../styledComponents/typography";
+import { TitleHeader } from "../styledComponents/typography";
 
 import backgroundImage from "../../assets/banner3.jpg";
 
@@ -22,7 +22,7 @@ export const TitleBar = () => {
         backgroundColor: "primary.main",
       }}
     >
-      <StyledTitleHeader>Dogami Companion</StyledTitleHeader>
+      <TitleHeader>Dogami Companion</TitleHeader>
     </StyledCentredBox>
   );
 };
