@@ -28,17 +28,9 @@ function Dashboard() {
 
   if (loading) return <Loading />;
 
-  if (error) return <UnauthorisedContent />;
+  // Not authorised. Would like a tidier solution, but this does work
+  if (error) return <Navigate to={`/unauthorised`} replace={false} />;
 
-  return (
-    <AuthorisedContent
-      backendData={data}
-      updateTrigger_cbfn={updateTrigger_cbfn}
-    />
-  );
-}
-
-const AuthorisedContent = (props) => {
   return (
     <Grid container spacing={2} align="center">
       <Grid item xs={12}>
@@ -48,7 +40,7 @@ const AuthorisedContent = (props) => {
       <Grid item xs={12} pb={2}>
         <DogamiFormModal
           openButtonText="Add a Dogami"
-          updateTrigger_cbfn={props.updateTrigger_cbfn}
+          updateTrigger_cbfn={updateTrigger_cbfn}
         />
       </Grid>
 
@@ -61,29 +53,17 @@ const AuthorisedContent = (props) => {
               color="primary.contrastText"
               sx={{ padding: "20px 0" }}
             >
-              You own {props.backendData.owned_dogs.length} dogs
+              You own {data.owned_dogs.length} dogs
             </Typography>
             <DogamiDisplayArea
-              dogData={props.backendData.owned_dogs}
-              updateTrigger_cbfn={props.updateTrigger_cbfn}
+              dogData={data.owned_dogs}
+              updateTrigger_cbfn={updateTrigger_cbfn}
             />
           </Stack>
         </TransparentPaper>
       </Grid>
     </Grid>
   );
-};
-
-const UnauthorisedContent = () => {
-  return (
-    <>
-      <h3>Dashboard</h3>
-      <div>
-        <p>You are not authorized!</p>
-        <Link to="/login">Return to login</Link>
-      </div>
-    </>
-  );
-};
+}
 
 export default Dashboard;

@@ -1,4 +1,5 @@
-import { useRouteError } from "react-router-dom";
+// Valid user but not authorised for the specific route
+// This is an unlikely edge case - use logs out and in as another user, then uses an old url
 
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -7,24 +8,19 @@ import Typography from "@mui/material/Typography";
 
 import { CompositeLinkUnderline } from "../../styledComponents/links";
 
-export default function ErrorPage() {
-  const error = useRouteError();
-  console.error(error);
-
+export default function Unauthorised() {
   return (
     <Container maxWidth="md">
       <Stack mt={8}>
         <Box pb={4} align="center">
           <Typography variant="h5" color="primary.contrastText">
-            Sorry, there has been an application error.
-            <br />
-            <br />"{error.statusText || error.message}"
+            You are not authorised to view the requested page <br />
           </Typography>
         </Box>
 
         <Box mb={5}>
-          <CompositeLinkUnderline linkLoc="/">
-            <Typography variant="h5">Return to Home Page</Typography>
+          <CompositeLinkUnderline linkLoc="../dashboard">
+            <Typography variant="h5">Return to Dashboard</Typography>
           </CompositeLinkUnderline>
         </Box>
       </Stack>

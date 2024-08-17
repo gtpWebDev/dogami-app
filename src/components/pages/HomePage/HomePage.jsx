@@ -3,8 +3,9 @@ import { Navigate, useOutletContext } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { CompositeLinkUnderline } from "../../styledComponents/links";
 import Typography from "@mui/material/Typography";
+
+import { CompositeLinkUnderline } from "../../styledComponents/links";
 
 import { SectionHeader } from "../../styledComponents/typography";
 

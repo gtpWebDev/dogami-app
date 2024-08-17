@@ -35,19 +35,8 @@ const Dogami = () => {
 
   if (loading) return <Loading />;
 
-  if (error) {
-    return (
-      <>
-        <h3>Dogami</h3>
-        <div>
-          <p>You do not have the permissions to view this dog!</p>
-          <p>
-            <Link to="/dashboard">Return to dashboard</Link>
-          </p>
-        </div>
-      </>
-    );
-  }
+  // Not authorised. Would like a tidier solution, but this does work
+  if (error) return <Navigate to={`/unauthorised`} replace={false} />;
 
   return (
     <Grid container spacing={2} align="center">

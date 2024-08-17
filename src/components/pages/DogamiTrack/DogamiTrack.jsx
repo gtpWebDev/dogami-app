@@ -33,8 +33,8 @@ const DogamiTrack = () => {
 
   if (loading) return <Loading />;
 
-  // Management of errors and lack of auth to come
-  if (error) return <Navigate to={`/errorPage`} replace={false} />;
+  // Not authorised. Would like a tidier solution, but this does work
+  if (error) return <Navigate to={`/unauthorised`} replace={false} />;
 
   return (
     <Grid container spacing={4}>

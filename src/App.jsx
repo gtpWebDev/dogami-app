@@ -15,8 +15,9 @@ import { axiosBackendGet } from "./lib/axiosRequests/axiosBackendEndpoints";
 
 import { Navigate } from "react-router-dom";
 
-// Material UI imports
-import { Container, Typography, AppBar, Grid, Box } from "@mui/material";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 function App() {
   // currentUser controls a significant amount of the navigation logic
@@ -29,7 +30,6 @@ function App() {
     // collect username on first nav to app or refresh
     const requestUsername = async () => {
       const response = await axiosBackendGet(CURRENT_USER_URI);
-      console.log("response", response);
       if (response.success) setCurrentUser(response.data);
       setGotUser(true);
     };
