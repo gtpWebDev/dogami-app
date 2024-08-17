@@ -22,6 +22,7 @@ function App() {
   // currentUser controls a significant amount of the navigation logic
   // and is used in the navbar for UX
   const [currentUser, setCurrentUser] = useState(null);
+  const [gotUser, setGotUser] = useState(false);
   const handleChangeCurrentUser = (user) => setCurrentUser(user);
 
   useEffect(() => {
@@ -30,40 +31,43 @@ function App() {
       const response = await axiosBackendGet(CURRENT_USER_URI);
       console.log("response", response);
       if (response.success) setCurrentUser(response.data);
+      setGotUser(true);
     };
     requestUsername();
   }, []);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-      }}
-    >
-      <ScrollToTop />
-      {/* Container uses full height, pushes footer to end of page*/}
-      <Container maxWidth="xl" sx={{ flexGrow: 1, py: 3 }}>
-        <Grid container direction="column">
-          {/* Fancy title bar, no function, scrolls off */}
-          <TitleBar />
+    gotUser && (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
+        <ScrollToTop />
+        {/* Container uses full height, pushes footer to end of page*/}
+        <Container maxWidth="xl" sx={{ flexGrow: 1, py: 3 }}>
+          <Grid container direction="column">
+            {/* Fancy title bar, no function, scrolls off */}
+            <TitleBar />
 
-          {/* Functional application bar */}
-          <NavBar
-            currentUser={currentUser}
-            handleChangeCurrentUser={handleChangeCurrentUser}
-          />
+            {/* Functional application bar */}
+            <NavBar
+              currentUser={currentUser}
+              handleChangeCurrentUser={handleChangeCurrentUser}
+            />
 
-          <MainArea
-            currentUser={currentUser}
-            handleChangeCurrentUser={handleChangeCurrentUser}
-          />
-        </Grid>
-      </Container>
+            <MainArea
+              currentUser={currentUser}
+              handleChangeCurrentUser={handleChangeCurrentUser}
+            />
+          </Grid>
+        </Container>
 
-      <Footer />
-    </Box>
+        <Footer />
+      </Box>
+    )
   );
 }
 
