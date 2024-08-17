@@ -20,7 +20,7 @@ export default function Unauthorised() {
 
         <Box mb={5}>
           <CompositeLinkUnderline linkLoc="../dashboard">
-            <Typography variant="h5">Return to Dashboard</Typography>
+            <Typography variant="h5">Return to the Application</Typography>
           </CompositeLinkUnderline>
         </Box>
       </Stack>

@@ -7,6 +7,11 @@ import Typography from "@mui/material/Typography";
 
 import { CompositeLinkUnderline } from "../../styledComponents/links";
 
+/**
+ * Haven't yet worked out a structure which allows the ErrorPage
+ * to easily use the layout used by the router child pages
+ */
+
 export default function ErrorPage() {
   const error = useRouteError();
   console.error(error);

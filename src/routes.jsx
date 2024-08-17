@@ -9,7 +9,7 @@ import ErrorPage from "./components/pages/ErrorPage/ErrorPage";
 import Unauthorised from "./components/pages/Unauthorised/Unauthorised";
 
 /**
- * Navigation strategy:
+ * Navigation approach:
  *
  * Logic stage 0. Netlify _redirects any domain server request to index.html.
  * Logic stage 1. React-router-app loaded in main.jsx, applying router logic - including invalid addresses to errorpage
