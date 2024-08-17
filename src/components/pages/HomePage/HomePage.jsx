@@ -1,19 +1,22 @@
-import { Link } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
 
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import {
-  CompositeLink,
-  CompositeLinkUnderline,
-} from "../../styledComponents/links";
+import { CompositeLinkUnderline } from "../../styledComponents/links";
 import Typography from "@mui/material/Typography";
 
 import { SectionHeader } from "../../styledComponents/typography";
 
 function HomePage() {
+  // Outlet context from react-router-app
+  const [currentUser, handleChangeCurrentUser] = useOutletContext();
+
   return (
     <Container maxWidth="md">
+      {/* User available after successful login, redirect to dashboard */}
+      {currentUser && <Navigate to={`/dashboard`} replace={false} />}
+
       <Stack mt={2}>
         <SectionHeader>Companion Home Page</SectionHeader>
         <Box pb={4} align="center">

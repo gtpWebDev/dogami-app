@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
 
 import { axiosBackendPost } from "../../../lib/axiosRequests/axiosBackendEndpoints";
 import AuthService from "../../../lib/AuthService";
@@ -20,7 +20,6 @@ import {
   LOGIN_URI,
   HEADER_JSON_CONFIG,
 } from "../../../constants/backendRequests";
-import { Navigate } from "react-router-dom";
 
 const Login = () => {
   // Outlet context from react-router-app
@@ -29,7 +28,7 @@ const Login = () => {
   return (
     <Container maxWidth="xs">
       {/* User available after successful login, redirect to dashboard */}
-      {/* {currentUser && <Navigate to={`/dashboard`} replace={false} />} */}
+      {currentUser && <Navigate to={`/dashboard`} replace={false} />}
 
       <Grid container spacing={2} align="center">
         <Grid item xs={12} mt={2}>
